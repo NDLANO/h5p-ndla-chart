@@ -12,9 +12,26 @@
       {
         "value": "barChart",
         "label": "Bar Chart"
+      },
+      {
+        "value": "extendedBarChart",
+        "label": "Extended Bar Chart"
       }
     ],
     "default": "pieChart"
+
+  },
+  {
+    "name": "xAxisText",
+    "type": "text",
+    "label": "X Axis Text",
+    "optional": true
+  },
+  {
+    "name": "yAxisText",
+    "type": "text",
+    "label": "Y Axis Text",
+    "optional": true
   },
   {
     "name": "listOfTypes",

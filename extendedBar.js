@@ -12,7 +12,7 @@ H5P.Chart.ExtendedBarChart = (function () {
     var self = this;
     var dataSet = params.listOfTypes;
     var defColors = d3.scale.ordinal()
-        .range(["#fbb033", "#2f2f2f", "#FFB6C1", "#B0C4DE", "#D3D3D3", "#20B2AA", "#FAFAD2"]);
+        .range(['#fbb033', '#2f2f2f', '#FFB6C1', '#B0C4DE', '#D3D3D3', '#20B2AA', '#FAFAD2']);
 
     //Lets check if the axes titles are defined, used for setting correct offset for title space in the generated svg
     var chartTextDefined = !!params.chartText;
@@ -32,26 +32,26 @@ H5P.Chart.ExtendedBarChart = (function () {
 
     var xAxis = d3.svg.axis()
         .scale(xScale)
-        .orient("bottom")
+        .orient('bottom')
         .tickFormat(function (d) {
           return dataSet[d % dataSet.length].text;
         });
 
     var yAxis = d3.svg.axis()
         .scale(yScale)
-        .orient("left");
+        .orient('left');
     // Create SVG element
     var svg = d3.select($wrapper[0])
-        .append("svg");
+        .append('svg');
 
-    svg.append("desc").html("chart");
+    svg.append('desc').html('chart');
 
     // Create x axis
-    var xAxisG = svg.append("g")
-        .attr("class", "x-axis");
+    var xAxisG = svg.append('g')
+        .attr('class', 'x-axis');
 
-    var yAxisG = svg.append("g")
-        .attr("class", "y-axis")
+    var yAxisG = svg.append('g')
+        .attr('class', 'y-axis')
 
     /**
      * @private
@@ -61,51 +61,51 @@ H5P.Chart.ExtendedBarChart = (function () {
     };
 
     // Create rectangles for bars
-    var rects = svg.selectAll("rect")
+    var rects = svg.selectAll('rect')
         .data(dataSet, key)
         .enter()
-        .append("rect")
-        .attr("fill", function(d) {
+        .append('rect')
+        .attr('fill', function(d) {
           if (d.color !== undefined) {
             return d.color;
           }
           return defColors(dataSet.indexOf(d) % 7);
         });
 
-    var chartText = svg.append("text")
-        .style("text-anchor", "middle")
-        .attr("class", "chart-title")
+    var chartText = svg.append('text')
+        .style('text-anchor', 'middle')
+        .attr('class', 'chart-title')
         .text(params.chartText);
 
-    var xAxisTitle = svg.append("text")
-        .style("text-anchor", "middle")
+    var xAxisTitle = svg.append('text')
+        .style('text-anchor', 'middle')
         .text(params.xAxisText);
 
-    var yAxisTitle = svg.append("text")
-        .style("transform", "rotate(90deg)")
+    var yAxisTitle = svg.append('text')
+        .style('transform', 'rotate(90deg)')
         .text(params.yAxisText);
 
     // Create inner rect labels
-    var xAxisGTexts = svg.selectAll("x-axis text")
+    var xAxisGTexts = svg.selectAll('x-axis text')
         .data(dataSet, key)
         .enter();
 
     // Create inner rect labels
-    var texts = svg.selectAll("text")
+    var texts = svg.selectAll('text')
         .data(dataSet, key)
         .enter()
-        .append("text")
+        .append('text')
         .text(function(d) {
           return d.value;
         })
-        .attr("text-anchor", "middle")
-        .attr("fill", function (d) {
+        .attr('text-anchor', 'middle')
+        .attr('fill', function (d) {
           if (d.fontColor !== undefined) {
             return d.fontColor;
           }
           return '000000';
         })
-        .attr("aria-hidden", true);
+        .attr('aria-hidden', true);
 
     /**
      * Fit the current bar chart to the size of the wrapper.
@@ -119,7 +119,7 @@ H5P.Chart.ExtendedBarChart = (function () {
       var lineHeight = (1.25 * fontSize);
       var xTickSize = (fontSize * 0.125);
       var xAxisRectOffset = lineHeight * 3;
-      var chartTitleTextHeight = svg.select(".chart-title")[0][0].getBoundingClientRect().height;
+      var chartTitleTextHeight = svg.select('.chart-title')[0][0].getBoundingClientRect().height;
       var chartTitleTextOffset =  chartTitleTextHeight + lineHeight; // Takes the height of the text element and adds line height, so we always have som space under the title
       var height = h - xTickSize - (lineHeight) - (chartTextDefined ? chartTitleTextOffset : 0); // Add space for labels below, and also the chart title
       //if xAxisTitle exists, them make room for it by adding more lineheight
@@ -128,17 +128,17 @@ H5P.Chart.ExtendedBarChart = (function () {
       }
 
       // Update SVG size
-      svg.attr("width", width)
-          .attr("height", h);
+      svg.attr('width', width)
+          .attr('height', h);
 
       // Update scales
       xScale.rangeRoundBands([0, width - xAxisRectOffset], 0.05); //In order for the X scale to NOT overlap Y axis ticks, we define and offset, making the X scale start further away from the svg wrapper edge
-      yScale.range([height, 0]); //Unlike in 'bar.js', we have "flipped" the chart, making origo to be in top left corner of chart. This is due to the nature of the Y axis ticks
+      yScale.range([height, 0]); //Unlike in 'bar.js', we have 'flipped' the chart, making origo to be in top left corner of chart. This is due to the nature of the Y axis ticks
 
       x.range([0, width]);
       y.range([height, 0]);
       xAxis.tickSize([0]);
-      xAxisG.attr("transform", "translate(0,0)").call(xAxis);
+      xAxisG.attr('transform', 'translate(0,0)').call(xAxis);
       //A lot of conditional moving here. If Y axis text is defined, we translate 40 px in the X direction. In the Y direction we translate downward the by current chartTitle height and line height
       yAxisG
           .attr('transform', 'translate(' + (isYAxisTextDefined ? 40 : 10) + ',' + (chartTextDefined ? chartTitleTextOffset : 0) + ')');
@@ -148,72 +148,72 @@ H5P.Chart.ExtendedBarChart = (function () {
           .ticks(getSmartTicks(d3.max(dataSet).value).count));
 
       //Gets all text element from the Y Axis
-      var yAxisTicksText = yAxisG.selectAll("g.tick text")[0];
+      var yAxisTicksText = yAxisG.selectAll('g.tick text')[0];
       //Gets width of last Y Axis tick text element
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
       // Move rectangles (bars)
-      rects.attr("x", function(d, i) {
+      rects.attr('x', function(d, i) {
         //if Y Axis title is defined lets make space for Y Axis title by adding the lineheight times 2, to each bar position, and the width of the last, and presumably longest, tick text width
         if(isYAxisTextDefined) {
           return xScale(i) + xAxisRectOffset + yAxisLastTickWidth;
         } else {
           return xScale(i) + lineHeight + yAxisLastTickWidth;
         }
-      }).attr("y", function(d) {
+      }).attr('y', function(d) {
         //If chart text is defined, add the height of the svg chart text and the lineheight to offsett the rects on the y
         return chartTextDefined ? yScale(d.value) + chartTitleTextOffset : yScale(d.value);
-      }).attr("width", xScale.rangeBand())
-          .attr("height", function(d) {
+      }).attr('width', xScale.rangeBand())
+          .attr('height', function(d) {
             return height - yScale(d.value) ;
           });
 
       //Sets the axes titles on resize
       chartText
-          .attr("x", width/2 )
-          .attr("y", lineHeight);
+          .attr('x', width/2 )
+          .attr('y', lineHeight);
 
       xAxisTitle
-          .attr("x", width/2 )
-          .attr("y", h);
+          .attr('x', width/2 )
+          .attr('y', h);
       yAxisTitle
-          .attr("x", height/2)
-          .attr("y", 0);
+          .attr('x', height/2)
+          .attr('y', 0);
 
-      var xAxisGTexts = svg.selectAll("g.x-axis g.tick");
+      var xAxisGTexts = svg.selectAll('g.x-axis g.tick');
 
       //Used for positioning/translating the X axis ticks to be in the middle of each bar
-      xAxisGTexts.attr("transform", function(d, i) {
+      xAxisGTexts.attr('transform', function(d, i) {
         var x;
         var y = chartTextDefined ? chartTitleTextOffset: 0;
         if(isYAxisTextDefined) {
           x = xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
           y += height;
-          return  "translate (" + x + ", " + y +")";
+          return  'translate (' + x + ', ' + y +')';
         }
         else {
           x =  xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
           y += height;
-          return  "translate (" + x + ", " + y +")";
+          return  'translate (' + x + ', ' + y +')';
         }
       });
 
 
       // Re-locate text value labels
-      texts.attr("x", function(d, i) {
+      texts.attr('x', function(d, i) {
         if(isYAxisTextDefined) {
           //Offset a bt more if the Y Axis text is defined
           return xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;}
         else {
           return xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
         }
-      }).attr("y", function(d) {
+      }).attr('y', function(d) {
         //Add more room with a ternary if chart text is defined
         return height - lineHeight + (chartTextDefined ? chartTitleTextOffset : 0);
       });
 
       // Hide ticks from readspeakers, the entire rectangle is already labelled
-      xAxisG.selectAll("text").attr("aria-hidden", true);
+      xAxisG.selectAll('text').attr('aria-hidden', true);
     };
   }
 
@@ -235,7 +235,7 @@ H5P.Chart.ExtendedBarChart = (function () {
     }
 
     //add one more step if the last tick value is the same as the max value
-    //if you don't want to add, remove "+1"
+    //if you don't want to add, remove '+1'
     var slicesCount = Math.ceil((val + 1) / step);
 
     return {

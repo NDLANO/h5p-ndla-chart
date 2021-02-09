@@ -22,7 +22,6 @@ H5P.Chart = (function ($, EventDispatcher) {
 
     // Set params and filter data set to make sure it's valid
     self.params = params;
-    console.log(self.params);
     if (self.params.listOfTypes) {
       Chart.filterData(self.params.listOfTypes);
     }
@@ -62,8 +61,6 @@ H5P.Chart = (function ($, EventDispatcher) {
     // Keep track of type.
     //self.type = (self.params.graphMode === 'pieChart' ? 'Pie' : 'Bar');
     self.type = getChartType(self.params.graphMode);
-    console.log("self");
-    console.log(self);
   }
 
   function getChartType(graphMode) {

@@ -25,18 +25,21 @@
     "name": "chartText",
     "type": "text",
     "label": "Chart Title",
+    "description" : "Adds a title on top of chart.",
     "optional": true
   },
   {
     "name": "xAxisText",
     "type": "text",
     "label": "X Axis Title",
+    "description" : "A title in the bottom of the chart to describe the X axis.",
     "optional": true
   },
   {
     "name": "yAxisText",
     "type": "text",
     "label": "Y Axis Title",
+    "description" : "A title on the left-hand side of the chart to describe the Y axis.",
     "optional": true
   },
   {

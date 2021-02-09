@@ -47,7 +47,8 @@ H5P.Chart.ExtendedBarChart = (function () {
 
     // Create x axis
     var xAxisG = svg.append("g")
-        .attr("class", "x-axis")
+        .attr("class", "x-axis");
+
     var yAxisG = svg.append("g")
         .attr("class", "y-axis")
         .attr('transform', 'translate(' + (isYAxisTextDefined ? 40 : 10) + ')');
@@ -173,8 +174,6 @@ H5P.Chart.ExtendedBarChart = (function () {
 
       var xAxisGTexts = svg.selectAll("g.x-axis g.tick");
 
-      console.log(xAxisGTexts);
-
       xAxisGTexts.attr("transform", function(d, i) {
         var x;
         var y;
@@ -202,7 +201,6 @@ H5P.Chart.ExtendedBarChart = (function () {
         return height - lineHeight;
       });
 
-      console.log(self)
       // Hide ticks from readspeakers, the entire rectangle is already labelled
       xAxisG.selectAll("text").attr("aria-hidden", true);
     };

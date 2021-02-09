@@ -8,8 +8,24 @@
         },
         {
           "label": "Bar Chart"
+        },
+        {
+          "value": "extendedBarChart",
+          "label": "Extended Bar Chart"
         }
       ]
+    },
+    {
+      "name": "xAxisText",
+      "type": "text",
+      "label": "X Axis Title",
+      "optional": true
+    },
+    {
+      "name": "yAxisText",
+      "type": "text",
+      "label": "Y Axis Title",
+      "optional": true
     },
     {
       "label": "Data elements",

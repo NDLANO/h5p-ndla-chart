@@ -7,9 +7,22 @@
           "label":"Kakediagram"
         },
         {
-          "label":"Søylediagram"
+          "value": "extendedBarChart",
+          "label": "Utvidet kakediagram"
         }
       ]
+    },
+    {
+      "name": "xAxisText",
+      "type": "text",
+      "label": "X aksetittel",
+      "optional": true
+    },
+    {
+      "name": "yAxisText",
+      "type": "text",
+      "label": "Y aksetittel",
+      "optional": true
     },
     {
       "label":"Verdier",

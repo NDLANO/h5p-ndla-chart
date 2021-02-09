@@ -24,13 +24,13 @@
   {
     "name": "xAxisText",
     "type": "text",
-    "label": "X Axis Text",
+    "label": "X Axis Title",
     "optional": true
   },
   {
     "name": "yAxisText",
     "type": "text",
-    "label": "Y Axis Text",
+    "label": "Y Axis Title",
     "optional": true
   },
   {

@@ -7,8 +7,11 @@
           "label":"Kakediagram"
         },
         {
+          "label": "Søylediagram"
+        },
+        {
           "value": "extendedBarChart",
-          "label": "Utvidet kakediagram"
+          "label": "Utvidet søylediagram"
         }
       ]
     },

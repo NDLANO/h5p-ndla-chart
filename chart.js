@@ -59,7 +59,6 @@ H5P.Chart = (function ($, EventDispatcher) {
     }
 
     // Keep track of type.
-    //self.type = (self.params.graphMode === 'pieChart' ? 'Pie' : 'Bar');
     self.type = getChartType(self.params.graphMode);
   }
 

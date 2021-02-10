@@ -35,6 +35,9 @@
     },
     {
       "path": "extendedBar.js"
+    },
+    {
+      "path": "line.js"
     }
   ],
   "editorDependencies": [

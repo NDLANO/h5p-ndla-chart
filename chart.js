@@ -73,6 +73,9 @@ H5P.Chart = (function ($, EventDispatcher) {
       case 'extendedBarChart':
         return 'ExtendedBar';
 
+        case 'lineChart':
+        return 'Line';
+
       default:
         return 'Pie';
     }

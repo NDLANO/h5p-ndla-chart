@@ -16,6 +16,10 @@
       {
         "value": "extendedBarChart",
         "label": "Extended Bar Chart"
+      },
+      {
+        "value": "lineChart",
+        "label": "Line Chart"
       }
     ],
     "default": "pieChart"

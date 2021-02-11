@@ -30,22 +30,147 @@
     "type": "text",
     "label": "Chart Title",
     "description" : "Adds a title on top of chart.",
-    "optional": true
+    "optional": true,
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "extendedBarChart",
+            "lineChart"
+          ]
+        }
+      ]
+    }
   },
   {
     "name": "xAxisText",
     "type": "text",
     "label": "X Axis Title",
     "description" : "A title in the bottom of the chart to describe the X axis.",
-    "optional": true
+    "optional": true,
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "extendedBarChart",
+            "lineChart"
+          ]
+        }
+      ]
+    }
   },
   {
     "name": "yAxisText",
     "type": "text",
     "label": "Y Axis Title",
     "description" : "A title on the left-hand side of the chart to describe the Y axis.",
-    "optional": true
+    "optional": true,
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "extendedBarChart"
+          ]
+        }
+      ]
+    }
   },
+  {
+    "name": "overrideColorGroup",
+    "type": "group",
+    "label": "Override color controls",
+    "importance": "high",
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "extendedBarChart"
+          ]
+        }
+      ]
+    },
+    "fields": [
+      {
+        "name": "overrideChartColorsTick",
+        "type": "boolean",
+        "label": "Override the chart color ",
+        "Described": "If ticked, the color selected will be used as data element color on all bars, and if line chart is selected, define the line color",
+        "importance": "low",
+        "default": false
+      },
+      {
+        "name": "overrideChartColor",
+        "type": "text",
+        "widget": "colorSelector",
+        "label": "overrideColor",
+        "importance": "low",
+        "default": "#000",
+
+        "optional": true,
+        "spectrum": {
+          "showInput": true,
+          "preferredFormat": "hex"
+        }
+      },
+      {
+        "name": "overrideChartColorText",
+        "type": "text",
+        "widget": "colorSelector",
+        "label": "overrideColorText",
+        "importance": "low",
+        "default": "#fff",
+
+        "optional": true,
+        "spectrum": {
+          "showInput": true,
+          "preferredFormat": "hex"
+        }
+      }
+    ]
+  },
+  {
+    "name": "lineColorGroup",
+    "type": "group",
+    "label": "Line color",
+    "importance": "high",
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "lineChart"
+          ]
+        }
+      ]
+    },
+    "fields": [
+      {
+        "name": "lineColor",
+        "type": "text",
+        "widget": "colorSelector",
+        "label": "Color of the line in the chart",
+        "importance": "low",
+        "default": "#000",
+
+        "optional": true,
+        "spectrum": {
+          "showInput": true,
+          "preferredFormat": "hex"
+        }
+      }
+    ]
+  },
+
+
   {
     "name": "listOfTypes",
     "type": "list",
@@ -54,6 +179,17 @@
     "entity": "option",
     "min": 1,
     "defaultNum": 2,
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "extendedBarChart"
+          ]
+        }
+      ]
+    },
     "field": {
       "name": "type",
       "type": "group",
@@ -95,6 +231,64 @@
           "label": "Font Color",
           "importance": "low",
           "default": "#fff",
+          "optional": true,
+          "spectrum": {
+            "showInput": true,
+            "preferredFormat": "hex"
+          }
+        }
+      ]
+    }
+  },
+
+
+  {
+    "name": "listOfTypes",
+    "type": "list",
+    "label": "Data elements",
+    "importance": "high",
+    "entity": "option",
+    "min": 1,
+    "defaultNum": 2,
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "lineChart"
+          ]
+        }
+      ]
+    },
+    "field": {
+      "name": "type",
+      "type": "group",
+      "label": "Data element",
+      "importance": "high",
+      "fields": [
+        {
+          "name": "text",
+          "type": "text",
+          "label": "Name",
+          "importance": "medium"
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "label": "Value",
+          "importance": "low",
+          "default": 1,
+          "min": 0.0001,
+          "decimals": 4
+        },
+        {
+          "name": "fontColor",
+          "type": "text",
+          "widget": "colorSelector",
+          "label": "Font Color",
+          "importance": "low",
+          "default": "#000",
           "optional": true,
           "spectrum": {
             "showInput": true,

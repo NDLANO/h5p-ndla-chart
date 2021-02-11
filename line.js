@@ -4,6 +4,7 @@ H5P.Chart.LineChart = (function () {
   /**
    * Creates a bar chart from the given data set.
    *
+   * Notice: LineChart uses its own listOfTypes in h5p-chart/semantics.json, its differentiated through the use of "showWhen"-widget
    * @class
    * @param {array} params from semantics, contains data set
    * @param {H5P.jQuery} $wrapper
@@ -76,6 +77,8 @@ H5P.Chart.LineChart = (function () {
         .data(dataSet, key)
         .enter();
 
+
+    //TODO: remove this, not used
     // Create inner rect labels
     var texts = svg.selectAll('text')
         .data([dataSet])
@@ -103,7 +106,25 @@ H5P.Chart.LineChart = (function () {
         .enter()
         .append("circle")
         .attr("r", 5)
-        .style("fill","grey");
+        .style("fill", params.lineColorGroup)
+        .on("mouseover", function(d, i) {
+          d3.select(this).transition().duration(200)
+              .attr("r", 7);
+          g.append("text")
+              .attr("x", function() { return xScale(i) - 2;})
+              .attr("y", function() { return yScale(d.value) - 20;})
+              .text(function() { return d.value;})
+              .attr("id", "text_id");})
+        .on("mouseout", function(d) {
+          // Putting style back to default values
+          d3.select(this).transition().duration(200)
+              .attr("r", 5)
+              .style("font-size", 12);
+
+          // Deleting extra elements
+          d3.select("#text_id").remove();
+
+        });
 
     var line = d3.svg.line();
 
@@ -209,11 +230,13 @@ H5P.Chart.LineChart = (function () {
 
       //apply lines after resize
       path.attr("class", "line-path")
-          .attr("d", line);
+          .attr("d", line)
+          .style("stroke", params.lineColorGroup);
 
       //Move dots according to scale
       dots.attr("cx", function(d,i) { return xScale(i);})
-          .attr("cy", function(d) { return yScale(d.value); });
+          .attr("cy", function(d) { return yScale(d.value); })
+
 
       // Hide ticks from readspeakers, the entire rectangle is already labelled
       xAxisG.selectAll('text').attr('aria-hidden', true);

@@ -4,6 +4,7 @@ H5P.Chart.ExtendedBarChart = (function () {
   /**
    * Creates a bar chart from the given data set.
    *
+   * Notice: ExtendedBar uses its own listOfTypes in h5p-chart/semantics.json, its differentiated through the use of "showWhen"-widget
    * @class
    * @param {array} params from semantics, contains data set
    * @param {H5P.jQuery} $wrapper
@@ -59,13 +60,15 @@ H5P.Chart.ExtendedBarChart = (function () {
     var key = function (d) {
       return dataSet.indexOf(d);
     };
-
     // Create rectangles for bars
     var rects = svg.selectAll('rect')
         .data(dataSet, key)
         .enter()
         .append('rect')
         .attr('fill', function(d) {
+          if(params.overrideColorGroup && params.overrideColorGroup.overrideChartColorsTick ){
+            return params.overrideColorGroup.overrideChartColor;
+          }
           if (d.color !== undefined) {
             return d.color;
           }
@@ -100,6 +103,9 @@ H5P.Chart.ExtendedBarChart = (function () {
         })
         .attr('text-anchor', 'middle')
         .attr('fill', function (d) {
+          if(params.overrideColorGroup && params.overrideColorGroup.overrideChartColorsTick ){
+            return params.overrideColorGroup.overrideChartColorText;
+          }
           if (d.fontColor !== undefined) {
             return d.fontColor;
           }

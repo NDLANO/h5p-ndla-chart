@@ -77,65 +77,37 @@ H5P.Chart.LineChart = (function () {
         .data(dataSet, key)
         .enter();
 
-
-    //TODO: remove this, not used
-    // Create inner rect labels
-    var texts = svg.selectAll('text')
-        .data([dataSet])
-        .enter()
-        .append('text')
-        .text(function(d) {
-          return d.value;
-        })
-        .attr('text-anchor', 'middle')
-        .attr('fill', function (d) {
-          if (d.fontColor !== undefined) {
-            return d.fontColor;
-          }
-          return '000000';
-        })
-        .attr('aria-hidden', true);
-
-    var g = svg.append("g");
+    var g = svg.append("g"); //Used for creating a container for the
     var path =  g.selectAll("path")
         .data([dataSet])
         .enter()
         .append("path");
     var dots = g.selectAll("circle")
-            .data(dataSet, key)
-            .enter()
-            .append("circle")
-            .attr("r", 5)
-            .style("fill", params.lineColorGroup)
-            .on("mouseover", function(d, i) {
-              d3.select(this).transition().duration(200)
-                  .attr("r", 7)
-
-              /*var div = svg.append("div")
-                  .attr("class", "tooltip")
-                  .attr("style", "left:" + (xScale(i) - 2) + "px;" + " top:" + (yScale(d.value) - 20) + "px;")
-
-                  .style("left", function() { return xScale(i) - 2;})
-                  .style("top", function() { return yScale(d.value) - 20;});
-              div.html(d.name + "<br/>"  + d.value);*/
-
-              g.append("text")
-                  .attr("x", function() { return xScale(i) - 2;})
-                  .attr("y", function() { return yScale(d.value) - 20;})
-
-                  .text(function() { return d.value;})
-                  .attr("class", "text-node");
-            })
-        .on("mouseout", function(d) {
-          // Putting style back to default values
+        .data(dataSet, key)
+        .enter()
+        .append("circle")
+        .attr("r", 5)
+        .style("fill", params.lineColorGroup)
+        .on("mouseover", function(d, i) { // Expands the dot the mouse is hovering and appends a text with
           d3.select(this).transition().duration(200)
-              .attr("r", 5)
-              .style("font-size", 12);
+              .attr("r", 7);
 
-          // Deleting extra elements
-          d3.select(".text-node").remove();
+          g.append("text")
+              .attr("x", function() { return xScale(i) - 2;})
+              .attr("y", function() { return yScale(d.value) - 20;})
 
-        }
+              .text(function() { return d.value;})
+              .attr("class", "text-node");
+        })
+        .on("mouseout", function(d) {
+              // Putting style back to default values
+              d3.select(this).transition().duration(200)
+                  .attr("r", 5)
+                  .style("font-size", 12);
+
+              // Deleting extra elements
+              d3.select(".text-node").remove();
+            }
         );
 
 
@@ -219,23 +191,10 @@ H5P.Chart.LineChart = (function () {
         }
       });
 
-      // Re-locate text value labels
-      texts.attr('x', function(d, i) {
-        if(isYAxisTextDefined) {
-          //Offset a bt more if the Y Axis text is defined
-          return xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;}
-        else {
-          return xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
-        }
-      }).attr('y', function(d) {
-        //Add more room with a ternary if chart text is defined
-        return height - lineHeight + (chartTextDefined ? chartTitleTextOffset : 0);
-      });
 
       var firstXaxisTick = xAxisG.select('.tick');
       var firstXaxisTickXPos = d3.transform(firstXaxisTick.attr("transform")).translate[0];
       var firstXaxisTickWidth = firstXaxisTick[0][0].getBoundingClientRect().width;
-      console.log(firstXaxisTickWidth);
       g.attr('transform', 'translate(' + (firstXaxisTickXPos - firstXaxisTickWidth )+ ',' + (chartTextDefined ? chartTitleTextOffset : 0) + ')');
 
       //Apply line positions after the scales have changed on resize
@@ -249,7 +208,7 @@ H5P.Chart.LineChart = (function () {
 
       //Move dots according to scale
       dots.attr("cx", function(d,i) { return xScale(i);})
-          .attr("cy", function(d) { return yScale(d.value); })
+          .attr("cy", function(d) { return yScale(d.value); });
 
 
       // Hide ticks from readspeakers, the entire rectangle is already labelled

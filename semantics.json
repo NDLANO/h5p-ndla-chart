@@ -103,7 +103,7 @@
         "name": "overrideChartColorsTick",
         "type": "boolean",
         "label": "Override the chart color ",
-        "Described": "If ticked, the color selected will be used as data element color on all bars, and if line chart is selected, define the line color",
+        "description": "If ticked, the colors selected will be used as data element color on all bars and txt.",
         "importance": "low",
         "default": false
       },
@@ -111,7 +111,8 @@
         "name": "overrideChartColor",
         "type": "text",
         "widget": "colorSelector",
-        "label": "overrideColor",
+        "label": "Override color for chart",
+        "description": "Defines a new color for all bars, replaces the individual colors in data elements",
         "importance": "low",
         "default": "#000",
 
@@ -125,7 +126,8 @@
         "name": "overrideChartColorText",
         "type": "text",
         "widget": "colorSelector",
-        "label": "overrideColorText",
+        "label": "Override  text color for chart",
+        "description": "Defines a new color for all text in bars.",
         "importance": "low",
         "default": "#fff",
 

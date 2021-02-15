@@ -23,7 +23,6 @@
       }
     ],
     "default": "pieChart"
-
   },
   {
     "name": "chartText",
@@ -293,7 +292,7 @@
   {
     "name": "figureDefinition",
     "type": "text",
-    "label": "Text read by readspeakers defining the figure as a chart.",
+    "label": "Text read by screen readers defining the figure as a chart.",
     "importance": "low",
     "default": "Chart",
     "common": true

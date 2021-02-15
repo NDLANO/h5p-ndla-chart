@@ -1,65 +1,184 @@
 {
   "semantics": [
-    {
-      "label": "Type of chart",
-      "options": [
-        {
-          "label": "Pie Chart"
-        },
-        {
-          "label": "Bar Chart"
-        },
-        {
-          "value": "extendedBarChart",
-          "label": "Extended Bar Chart"
-        }
-      ]
-    },
-    {
-      "name": "chartText",
-      "type": "text",
-      "label": "Chart Title",
-      "description" : "Adds a title on top of chart.",
-      "optional": true
-    },
-    {
-      "name": "xAxisText",
-      "type": "text",
-      "label": "X Axis Title",
-      "description" : "A title in the bottom of the chart to describe the X axis.",
-      "optional": true
-    },
-    {
-      "name": "yAxisText",
-      "type": "text",
-      "label": "Y Axis Title",
-      "description" : "A title on the left-hand side of the chart to describe the Y axis.",
-      "optional": true
-    },
-    {
-      "label": "Data elements",
-      "entity": "option",
-      "field": {
-        "label": "Data element",
-        "fields": [
+    [
+      {
+        "label": "Type of chart",
+        "options": [
           {
-            "label": "Name"
+            "label": "Pie Chart"
           },
           {
-            "label": "Value"
+            "label": "Bar Chart"
           },
           {
-            "label": "Color"
+            "label": "Extended Bar Chart"
           },
           {
-            "label": "Font Color"
+            "label": "Line Chart"
           }
         ]
+      },
+      {
+        "label": "Chart Title",
+        "description" : "Adds a title on top of chart.",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "extendedBarChart",
+                "lineChart"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "label": "X Axis Title",
+        "description" : "A title in the bottom of the chart to describe the X axis.",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "extendedBarChart",
+                "lineChart"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "label": "Y Axis Title",
+        "description" : "A title on the left-hand side of the chart to describe the Y axis.",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "extendedBarChart",
+                "lineChart"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "label": "Override color controls",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "extendedBarChart"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "label": "Override the chart color ",
+            "description": "If ticked, the colors selected will be used as data element color on all bars and txt."
+          },
+          {
+            "label": "Override color for chart",
+            "description": "Defines a new color for all bars, replaces the individual colors in data elements"
+          },
+          {
+            "label": "Override  text color for chart",
+            "description": "Defines a new color for all text in bars."
+          }
+        ]
+      },
+      {
+
+        "label": "Line color",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "lineChart"
+              ]
+            }
+          ]
+        },
+        "fields": [
+          {
+            "label": "Color of the line in the chart"
+          }
+        ]
+      },
+
+
+      {
+        "label": "Data elements",
+        "entity": "option",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "extendedBarChart",
+                "barChart",
+                "pieChart"
+              ]
+            }
+          ]
+        },
+        "field": {
+          "label": "Data element",
+          "fields": [
+            {
+              "label": "Name"
+            },
+            {
+              "label": "Value"
+            },
+            {
+              "label": "Color"
+            },
+            {
+              "label": "Font Color"
+            }
+          ]
+        }
+      },
+
+
+      {
+        "label": "Data elements",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "lineChart"
+              ]
+            }
+          ]
+        },
+        "field": {
+          "label": "Data element",
+          "fields": [
+            {
+              "label": "X Value"
+            },
+            {
+              "label": "Y Value"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Text read by screen readers defining the figure as a chart."
       }
-    },
-    {
-      "label": "Text read by readspeakers defining the figure as a chart.",
-      "default": "Chart"
-    }
+    ]
   ]
 }

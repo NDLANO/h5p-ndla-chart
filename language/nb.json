@@ -18,29 +18,18 @@
       ]
     },
     {
-      "name": "chartText",
-      "type": "text",
       "label": "Graftittel",
-      "description" : "Tittelen på grafen, blir lagt til i toppen.",
-      "optional": true
+      "description" : "Tittelen på grafen, blir lagt til i toppen."
     },
     {
-      "name": "xAxisText",
-      "type": "text",
       "label": "X aksetittel",
-      "description" : "En tittel i bunnen av grafen til å beskrive X aksen.",
-      "optional": true
+      "description" : "En tittel i bunnen av grafen til å beskrive X aksen."
     },
     {
-      "name": "yAxisText",
-      "type": "text",
       "label": "Y aksetittel",
-      "description" : "En tittel til venstre av grafen til å beskrive Y aksen.",
-      "optional": true
+      "description" : "En tittel til venstre av grafen til å beskrive Y aksen."
     },
     {
-      "name": "overrideColorGroup",
-      "type": "group",
       "label": "Overstyr farger",
       "widget": "showWhen",
       "showWhen": {
@@ -55,21 +44,12 @@
       },
       "fields": [
         {
-          "name": "overrideChartColorsTick",
-          "type": "boolean",
           "label": "Overstyr diagramfarge",
-          "description": "Kryss av for å overstyre fargene i diagrammet",
-          "importance": "low",
-          "default": false
+          "description": "Kryss av for å overstyre fargene i diagrammet"
         },
         {
-          "name": "overrideChartColor",
-          "type": "text",
-          "widget": "colorSelector",
           "label": "Overstyringsfarge for søyler",
           "description": "Overstyrer søylefargene med valgt farge",
-          "importance": "low",
-          "default": "#000",
 
           "optional": true,
           "spectrum": {
@@ -78,39 +58,76 @@
           }
         },
         {
-          "name": "overrideChartColorText",
-          "type": "text",
-          "widget": "colorSelector",
           "label": "Overstyringsfarge for tekst i søyler",
-          "description": "Overstyrer fargen i teksten inni søylene",
-          "importance": "low",
-          "default": "#fff",
-
-          "optional": true,
-          "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
-          }
+          "description": "Overstyrer fargen i teksten inni søylene"
         }
       ]
     },
     {
-      "label":"Verdier",
-      "entity":"verdi",
-      "field":{
-        "label":"Verdi",
-        "fields":[
+      "label": "Farge på linje",
+      "widget": "showWhen",
+      "fields": [
+        {
+          "label": "Fargen på linjen i linjediagrammet"
+        }
+      ]
+    },
+    {
+      "label": "Verdier",
+      "entity": "option",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
           {
-            "label":"Navn"
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "barChart",
+              "pieChart"
+            ]
+          }
+        ]
+      },
+      "field": {
+        "label": "Verdi",
+        "fields": [
+          {
+            "label": "Navn"
           },
           {
-            "label":"Verdi"
+            "label": "Verdi"
           },
           {
-            "label":"Bakgrunnsfarge"
+            "label": "Farge"
           },
           {
-            "label":"Tekstfarge"
+            "label": "Tekstfarge"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Verdier",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "lineChart"
+            ]
+          }
+        ]
+      },
+      "field": {
+        "label": "Verdi",
+        "fields": [
+          {
+            "label": "X Verdi",
+            "importance": "medium"
+          },
+          {
+            "label": "Y Verdi"
           }
         ]
       }

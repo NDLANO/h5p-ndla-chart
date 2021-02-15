@@ -10,8 +10,10 @@
           "label": "Søylediagram"
         },
         {
-          "value": "extendedBarChart",
           "label": "Utvidet søylediagram"
+        },
+        {
+          "label": "Linjediagram"
         }
       ]
     },
@@ -35,6 +37,62 @@
       "label": "Y aksetittel",
       "description" : "En tittel til venstre av grafen til å beskrive Y aksen.",
       "optional": true
+    },
+    {
+      "name": "overrideColorGroup",
+      "type": "group",
+      "label": "Overstyr farger",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": "overrideChartColorsTick",
+          "type": "boolean",
+          "label": "Overstyr diagramfarge",
+          "description": "Kryss av for å overstyre fargene i diagrammet",
+          "importance": "low",
+          "default": false
+        },
+        {
+          "name": "overrideChartColor",
+          "type": "text",
+          "widget": "colorSelector",
+          "label": "Overstyringsfarge for søyler",
+          "description": "Overstyrer søylefargene med valgt farge",
+          "importance": "low",
+          "default": "#000",
+
+          "optional": true,
+          "spectrum": {
+            "showInput": true,
+            "preferredFormat": "hex"
+          }
+        },
+        {
+          "name": "overrideChartColorText",
+          "type": "text",
+          "widget": "colorSelector",
+          "label": "Overstyringsfarge for tekst i søyler",
+          "description": "Overstyrer fargen i teksten inni søylene",
+          "importance": "low",
+          "default": "#fff",
+
+          "optional": true,
+          "spectrum": {
+            "showInput": true,
+            "preferredFormat": "hex"
+          }
+        }
+      ]
     },
     {
       "label":"Verdier",

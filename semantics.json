@@ -75,7 +75,8 @@
         {
           "field": "graphMode",
           "equals" : [
-            "extendedBarChart"
+            "extendedBarChart",
+            "lineChart"
           ]
         }
       ]
@@ -185,7 +186,9 @@
         {
           "field": "graphMode",
           "equals" : [
-            "extendedBarChart"
+            "extendedBarChart",
+            "barChart",
+            "pieChart"
           ]
         }
       ]
@@ -270,30 +273,17 @@
         {
           "name": "text",
           "type": "text",
-          "label": "Name",
+          "label": "X Value",
           "importance": "medium"
         },
         {
           "name": "value",
           "type": "number",
-          "label": "Value",
+          "label": "Y Value",
           "importance": "low",
           "default": 1,
           "min": 0.0001,
           "decimals": 4
-        },
-        {
-          "name": "fontColor",
-          "type": "text",
-          "widget": "colorSelector",
-          "label": "Font Color",
-          "importance": "low",
-          "default": "#000",
-          "optional": true,
-          "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
-          }
         }
       ]
     }

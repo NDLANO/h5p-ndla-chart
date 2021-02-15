@@ -102,19 +102,30 @@ H5P.Chart.LineChart = (function () {
         .enter()
         .append("path");
     var dots = g.selectAll("circle")
-        .data(dataSet, key)
-        .enter()
-        .append("circle")
-        .attr("r", 5)
-        .style("fill", params.lineColorGroup)
-        .on("mouseover", function(d, i) {
-          d3.select(this).transition().duration(200)
-              .attr("r", 7);
-          g.append("text")
-              .attr("x", function() { return xScale(i) - 2;})
-              .attr("y", function() { return yScale(d.value) - 20;})
-              .text(function() { return d.value;})
-              .attr("id", "text_id");})
+            .data(dataSet, key)
+            .enter()
+            .append("circle")
+            .attr("r", 5)
+            .style("fill", params.lineColorGroup)
+            .on("mouseover", function(d, i) {
+              d3.select(this).transition().duration(200)
+                  .attr("r", 7)
+
+              /*var div = svg.append("div")
+                  .attr("class", "tooltip")
+                  .attr("style", "left:" + (xScale(i) - 2) + "px;" + " top:" + (yScale(d.value) - 20) + "px;")
+
+                  .style("left", function() { return xScale(i) - 2;})
+                  .style("top", function() { return yScale(d.value) - 20;});
+              div.html(d.name + "<br/>"  + d.value);*/
+
+              g.append("text")
+                  .attr("x", function() { return xScale(i) - 2;})
+                  .attr("y", function() { return yScale(d.value) - 20;})
+
+                  .text(function() { return d.value;})
+                  .attr("class", "text-node");
+            })
         .on("mouseout", function(d) {
           // Putting style back to default values
           d3.select(this).transition().duration(200)
@@ -122,9 +133,12 @@ H5P.Chart.LineChart = (function () {
               .style("font-size", 12);
 
           // Deleting extra elements
-          d3.select("#text_id").remove();
+          d3.select(".text-node").remove();
 
-        });
+        }
+        );
+
+
 
     var line = d3.svg.line();
 

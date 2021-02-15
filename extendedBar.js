@@ -6,7 +6,7 @@ H5P.Chart.ExtendedBarChart = (function () {
    *
    * Notice: ExtendedBar uses its own listOfTypes in h5p-chart/semantics.json, its differentiated through the use of "showWhen"-widget
    * @class
-   * @param {array} params from semantics, contains data set
+   * @param {Object} params from semantics, contains data set
    * @param {H5P.jQuery} $wrapper
    */
   function extendedBarChart(params, $wrapper) {
@@ -218,7 +218,7 @@ H5P.Chart.ExtendedBarChart = (function () {
         return height - lineHeight + (chartTextDefined ? chartTitleTextOffset : 0);
       });
 
-      // Hide ticks from readspeakers, the entire rectangle is already labelled
+      // Hide ticks from screen readers, the entire rectangle is already labelled
       xAxisG.selectAll('text').attr('aria-hidden', true);
     };
   }

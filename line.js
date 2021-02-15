@@ -6,7 +6,7 @@ H5P.Chart.LineChart = (function () {
    *
    * Notice: LineChart uses its own listOfTypes in h5p-chart/semantics.json, its differentiated through the use of "showWhen"-widget
    * @class
-   * @param {array} params from semantics, contains data set
+   * @param {Object} params from semantics, contains data set
    * @param {H5P.jQuery} $wrapper
    */
   function LineChart(params, $wrapper) {
@@ -211,7 +211,7 @@ H5P.Chart.LineChart = (function () {
           .attr("cy", function(d) { return yScale(d.value); });
 
 
-      // Hide ticks from readspeakers, the entire rectangle is already labelled
+      // Hide ticks from screen readers, the entire rectangle is already labelled
       xAxisG.selectAll('text').attr('aria-hidden', true);
     };
   }

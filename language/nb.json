@@ -20,19 +20,6 @@
     {
       "label": "Verdier",
       "entity": "option",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart",
-              "barChart",
-              "pieChart"
-            ]
-          }
-        ]
-      },
       "field": {
         "label": "Verdi",
         "fields": [
@@ -52,7 +39,7 @@
       }
     },
     {
-      "label": "Tekst lest av readspeakers (som definerer figuren som et diagram).",
+      "label": "Tekst lest av screen readers (som definerer figuren som et diagram).",
       "default": "Diagram"
     },
     {
@@ -69,17 +56,6 @@
     },
     {
       "label": "Overstyr farger",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart"
-            ]
-          }
-        ]
-      },
       "fields": [
         {
           "label": "Overstyr diagramfarge",
@@ -87,13 +63,7 @@
         },
         {
           "label": "Overstyringsfarge for søyler",
-          "description": "Overstyrer søylefargene med valgt farge",
-
-          "optional": true,
-          "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
-          }
+          "description": "Overstyrer søylefargene med valgt farge"
         },
         {
           "label": "Overstyringsfarge for tekst i søyler",
@@ -103,33 +73,19 @@
     },
     {
       "label": "Farge på linje",
-      "widget": "showWhen",
       "fields": [
         {
           "label": "Fargen på linjen i linjediagrammet"
         }
       ]
     },
-
     {
       "label": "Verdier",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "lineChart"
-            ]
-          }
-        ]
-      },
       "field": {
         "label": "Verdi",
         "fields": [
           {
-            "label": "X Verdi",
-            "importance": "medium"
+            "label": "X Verdi"
           },
           {
             "label": "Y Verdi"

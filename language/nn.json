@@ -20,24 +20,11 @@
     {
       "label": "Verdiar",
       "entity": "option",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart",
-              "barChart",
-              "pieChart"
-            ]
-          }
-        ]
-      },
       "field": {
-        "label": "Verdiar",
+        "label": "Verdi",
         "fields": [
           {
-            "label": "Namn"
+            "label": "Navn"
           },
           {
             "label": "Verdi"
@@ -52,7 +39,7 @@
       }
     },
     {
-      "label": "Tekst lest av skjermlesar (som definerer figuren som eit diagram).",
+      "label": "Tekst lest av screen readers (som definerer figuren som eit diagram).",
       "default": "Diagram"
     },
     {
@@ -68,18 +55,7 @@
       "description" : "Ein tittel til venstre av grafen til å beskrive Y aksen."
     },
     {
-      "label": "Overstyr farger",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart"
-            ]
-          }
-        ]
-      },
+      "label": "Overstyr fargar",
       "fields": [
         {
           "label": "Overstyr diagramfarge",
@@ -87,13 +63,7 @@
         },
         {
           "label": "Overstyringsfarge for søyler",
-          "description": "Overstyrer søylefargane med valgt farge",
-
-          "optional": true,
-          "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
-          }
+          "description": "Overstyrer søylefargane med valgt farge"
         },
         {
           "label": "Overstyringsfarge for tekst i søyler",
@@ -103,7 +73,6 @@
     },
     {
       "label": "Farge på linje",
-      "widget": "showWhen",
       "fields": [
         {
           "label": "Fargen på linjen i linjediagrammet"
@@ -112,23 +81,11 @@
     },
     {
       "label": "Verdiar",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "lineChart"
-            ]
-          }
-        ]
-      },
       "field": {
         "label": "Verdi",
         "fields": [
           {
-            "label": "X Verdi",
-            "importance": "medium"
+            "label": "X Verdi"
           },
           {
             "label": "Y Verdi"

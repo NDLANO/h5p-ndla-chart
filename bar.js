@@ -125,7 +125,7 @@ H5P.Chart.BarChart = (function () {
         return height - yScale(d.value) + lineHeight;
       });
 
-      // Hide ticks from readspeakers, the entire rectangle is already labelled
+      // Hide ticks from screen readers, the entire rectangle is already labelled
       xAxisG.selectAll("text").attr("aria-hidden", true);
     };
   }

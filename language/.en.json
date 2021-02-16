@@ -1,6 +1,5 @@
 {
   "semantics": [
-    [
       {
         "label": "Type of chart",
         "options": [
@@ -21,19 +20,6 @@
       {
         "label": "Data elements",
         "entity": "option",
-        "widget": "showWhen",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "extendedBarChart",
-                "barChart",
-                "pieChart"
-              ]
-            }
-          ]
-        },
         "field": {
           "label": "Data element",
           "fields": [
@@ -53,68 +39,23 @@
         }
       },
       {
-        "label": "Text read by screen readers defining the figure as a chart."
+        "label": "Text read by screen readers defining the figure as a chart.",
+        "default" : "Chart"
       },
       {
         "label": "Chart Title",
-        "description" : "Adds a title on top of chart.",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "extendedBarChart",
-                "lineChart"
-              ]
-            }
-          ]
-        }
+        "description" : "Adds a title on top of chart."
       },
       {
         "label": "X Axis Title",
-        "description" : "A title in the bottom of the chart to describe the X axis.",
-        "widget": "showWhen",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "extendedBarChart",
-                "lineChart"
-              ]
-            }
-          ]
-        }
+        "description" : "A title in the bottom of the chart to describe the X axis."
       },
       {
         "label": "Y Axis Title",
-        "description" : "A title on the left-hand side of the chart to describe the Y axis.",
-        "widget": "showWhen",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "extendedBarChart",
-                "lineChart"
-              ]
-            }
-          ]
-        }
+        "description" : "A title on the left-hand side of the chart to describe the Y axis."
       },
       {
         "label": "Override color controls",
-        "widget": "showWhen",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "extendedBarChart"
-              ]
-            }
-          ]
-        },
         "fields": [
           {
             "label": "Override the chart color ",
@@ -131,19 +72,7 @@
         ]
       },
       {
-
         "label": "Line color",
-        "widget": "showWhen",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "lineChart"
-              ]
-            }
-          ]
-        },
         "fields": [
           {
             "label": "Color of the line in the chart"
@@ -152,17 +81,6 @@
       },
       {
         "label": "Data elements",
-        "widget": "showWhen",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "lineChart"
-              ]
-            }
-          ]
-        },
         "field": {
           "label": "Data element",
           "fields": [
@@ -176,5 +94,4 @@
         }
       }
     ]
-  ]
 }

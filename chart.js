@@ -53,7 +53,7 @@ H5P.Chart = (function ($, EventDispatcher) {
       ];
     }
 
-    // Set the figure definition for readspeakers if it doesn't exist
+    // Set the figure definition for screen readers if it doesn't exist
     if (!self.params.figureDefinition) {
       self.params.figureDefinition = "Chart";
     }

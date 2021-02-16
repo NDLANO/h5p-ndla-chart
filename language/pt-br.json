@@ -21,7 +21,7 @@
       "label": "Dados",
       "entity": "opção",
       "field": {
-        "label": "Dados",
+        "label": "Elemento de dado",
         "fields": [
           {
             "label": "Nome"
@@ -44,64 +44,18 @@
     },
     {
       "label": "Título do gráfico",
-      "description" : "Adiciona um título acima de gráfico.",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart",
-              "lineChart"
-            ]
-          }
-        ]
-      }
+      "description" : "Adiciona um título acima de gráfico."
     },
     {
       "label": "Título do eixo X",
-      "description" : "Um título sob o gráfico para descrever o eixo X",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart",
-              "lineChart"
-            ]
-          }
-        ]
-      }
+      "description" : "Um título sob o gráfico para descrever o eixo X"
     },
     {
       "label": "Título do eixo X",
-      "description" : "Um título sob o gráfico para descrever o eixo Y",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart",
-              "lineChart"
-            ]
-          }
-        ]
-      }
+      "description" : "Um título sob o gráfico para descrever o eixo Y"
     },
     {
       "label": "Substituir cores",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart"
-            ]
-          }
-        ]
-      },
       "fields": [
         {
           "label": "Substituir as cores do gráfico",
@@ -118,19 +72,7 @@
       ]
     },
     {
-
       "label": "Cor da linha",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "lineChart"
-            ]
-          }
-        ]
-      },
       "fields": [
         {
           "label": "Cor da linha no gráfico"
@@ -139,17 +81,6 @@
     },
     {
       "label": "Dados de elementos",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "lineChart"
-            ]
-          }
-        ]
-      },
       "field": {
         "label": "Elemento de dado",
         "fields": [

@@ -18,6 +18,44 @@
       ]
     },
     {
+      "label": "Verdier",
+      "entity": "option",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "barChart",
+              "pieChart"
+            ]
+          }
+        ]
+      },
+      "field": {
+        "label": "Verdi",
+        "fields": [
+          {
+            "label": "Navn"
+          },
+          {
+            "label": "Verdi"
+          },
+          {
+            "label": "Farge"
+          },
+          {
+            "label": "Tekstfarge"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Tekst lest av readspeakers (som definerer figuren som et diagram).",
+      "default": "Diagram"
+    },
+    {
       "label": "Graftittel",
       "description" : "Tittelen på grafen, blir lagt til i toppen."
     },
@@ -72,40 +110,7 @@
         }
       ]
     },
-    {
-      "label": "Verdier",
-      "entity": "option",
-      "widget": "showWhen",
-      "showWhen": {
-        "rules" : [
-          {
-            "field": "graphMode",
-            "equals" : [
-              "extendedBarChart",
-              "barChart",
-              "pieChart"
-            ]
-          }
-        ]
-      },
-      "field": {
-        "label": "Verdi",
-        "fields": [
-          {
-            "label": "Navn"
-          },
-          {
-            "label": "Verdi"
-          },
-          {
-            "label": "Farge"
-          },
-          {
-            "label": "Tekstfarge"
-          }
-        ]
-      }
-    },
+
     {
       "label": "Verdier",
       "widget": "showWhen",
@@ -131,10 +136,6 @@
           }
         ]
       }
-    },
-    {
-      "label": "Tekst lest av readspeakers (som definerer figuren som et diagram).",
-      "default": "Diagram"
     }
   ]
 }

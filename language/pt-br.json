@@ -35,6 +35,126 @@
     {
       "label": "Texto lido por leitores de tela definindo a figura como um gráfico.",
       "default": "Gráfico"
+    },
+    {
+      "label": "Título do gráfico",
+      "description" : "Adiciona um título acima de gráfico.",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "lineChart"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Título do eixo X",
+      "description" : "Um título sob o gráfico para descrever o eixo X",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "lineChart"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Título do eixo X",
+      "description" : "Um título sob o gráfico para descrever o eixo Y",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "lineChart"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Substituir cores",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "label": "Substituir as cores do gráfico",
+          "description": "Se marcado, as cores selecionadas serão usadas como cor do elemento de dados em todas as barras e textos."
+        },
+        {
+          "label": "Substituir a cor do gráfico",
+          "description": "Define uma nova cor para todas os barras. Substitui as cores individuais nos elementos de dados"
+        },
+        {
+          "label": "Substituir a cor do texto do gráfico",
+          "description": "Define uma nova cor para todos os textos nas barras."
+        }
+      ]
+    },
+    {
+
+      "label": "Cor da linha",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "lineChart"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "label": "Cor da linha no gráfico"
+        }
+      ]
+    },
+    {
+      "label": "Dados de elementos",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "lineChart"
+            ]
+          }
+        ]
+      },
+      "field": {
+        "label": "Elemento de dado",
+        "fields": [
+          {
+            "label": "Valor X"
+          },
+          {
+            "label": "Valor Y"
+          }
+        ]
+      }
     }
   ]
 }

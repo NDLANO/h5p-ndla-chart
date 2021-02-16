@@ -7,34 +7,134 @@
           "label":"Kakediagram"
         },
         {
-          "label":"Søylediagram"
+          "label": "Søylediagram"
+        },
+        {
+          "label": "Utvida søylediagram"
+        },
+        {
+          "label": "Linjediagram"
         }
       ]
     },
     {
-      "label":"Verdiar",
-      "entity":"verdi",
-      "field":{
-        "label":"Verdi",
-        "fields":[
+      "label": "Verdiar",
+      "entity": "option",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
           {
-            "label":"Namn"
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "barChart",
+              "pieChart"
+            ]
+          }
+        ]
+      },
+      "field": {
+        "label": "Verdiar",
+        "fields": [
+          {
+            "label": "Namn"
           },
           {
-            "label":"Verdi"
+            "label": "Verdi"
           },
           {
-            "label":"Bakgrunnsfarge"
+            "label": "Farge"
           },
           {
-            "label":"Tekstfarge"
+            "label": "Tekstfarge"
           }
         ]
       }
     },
     {
-      "label": "Text read by readspeakers defining the figure as a chart.",
+      "label": "Tekst lest av skjermlesar (som definerer figuren som eit diagram).",
       "default": "Diagram"
+    },
+    {
+      "label": "Graftittel",
+      "description" : "Tittelen på grafen, blir lagt til i toppen."
+    },
+    {
+      "label": "X aksetittel",
+      "description" : "Ein tittel i bunnen av grafen til å beskrive X aksen."
+    },
+    {
+      "label": "Y aksetittel",
+      "description" : "Ein tittel til venstre av grafen til å beskrive Y aksen."
+    },
+    {
+      "label": "Overstyr farger",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "label": "Overstyr diagramfarge",
+          "description": "Kryss av for å overstyre fargane i diagrammet"
+        },
+        {
+          "label": "Overstyringsfarge for søyler",
+          "description": "Overstyrer søylefargane med valgt farge",
+
+          "optional": true,
+          "spectrum": {
+            "showInput": true,
+            "preferredFormat": "hex"
+          }
+        },
+        {
+          "label": "Overstyringsfarge for tekst i søyler",
+          "description": "Overstyrer fargen i teksten inni søylene"
+        }
+      ]
+    },
+    {
+      "label": "Farge på linje",
+      "widget": "showWhen",
+      "fields": [
+        {
+          "label": "Fargen på linjen i linjediagrammet"
+        }
+      ]
+    },
+    {
+      "label": "Verdiar",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "lineChart"
+            ]
+          }
+        ]
+      },
+      "field": {
+        "label": "Verdi",
+        "fields": [
+          {
+            "label": "X Verdi",
+            "importance": "medium"
+          },
+          {
+            "label": "Y Verdi"
+          }
+        ]
+      }
     }
   ]
 }

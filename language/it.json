@@ -35,6 +35,126 @@
     {
       "label": "Testo letto da un lettore vocale che  descrive la figura come un grafico",
       "default": "Grafico"
+    },
+    {
+      "label": "Chart Title",
+      "description" : "Adds a title on top of chart.",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "lineChart"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "X Axis Title",
+      "description" : "A title in the bottom of the chart to describe the X axis.",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "lineChart"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Y Axis Title",
+      "description" : "A title on the left-hand side of the chart to describe the Y axis.",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart",
+              "lineChart"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "label": "Override color controls",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "extendedBarChart"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "label": "Override the chart color ",
+          "description": "If ticked, the colors selected will be used as data element color on all bars and txt."
+        },
+        {
+          "label": "Override color for chart",
+          "description": "Defines a new color for all bars, replaces the individual colors in data elements"
+        },
+        {
+          "label": "Override  text color for chart",
+          "description": "Defines a new color for all text in bars."
+        }
+      ]
+    },
+    {
+
+      "label": "Line color",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "lineChart"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "label": "Color of the line in the chart"
+        }
+      ]
+    },
+    {
+      "label": "Data elements",
+      "widget": "showWhen",
+      "showWhen": {
+        "rules" : [
+          {
+            "field": "graphMode",
+            "equals" : [
+              "lineChart"
+            ]
+          }
+        ]
+      },
+      "field": {
+        "label": "Data element",
+        "fields": [
+          {
+            "label": "X Value"
+          },
+          {
+            "label": "Y Value"
+          }
+        ]
+      }
     }
   ]
 }

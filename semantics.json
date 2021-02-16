@@ -25,6 +25,85 @@
     "default": "pieChart"
   },
   {
+    "name": "listOfTypes",
+    "type": "list",
+    "label": "Data elements",
+    "importance": "high",
+    "entity": "option",
+    "min": 1,
+    "defaultNum": 2,
+    "widget": "showWhen",
+    "showWhen": {
+      "rules" : [
+        {
+          "field": "graphMode",
+          "equals" : [
+            "extendedBarChart",
+            "barChart",
+            "pieChart"
+          ]
+        }
+      ]
+    },
+    "field": {
+      "name": "type",
+      "type": "group",
+      "label": "Data element",
+      "importance": "high",
+      "fields": [
+        {
+          "name": "text",
+          "type": "text",
+          "label": "Name",
+          "importance": "medium"
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "label": "Value",
+          "importance": "low",
+          "default": 1,
+          "min": 0.0001,
+          "decimals": 4
+        },
+        {
+          "name": "color",
+          "type": "text",
+          "widget": "colorSelector",
+          "label": "Color",
+          "importance": "low",
+          "default": "#000",
+          "optional": true,
+          "spectrum": {
+            "showInput": true,
+            "preferredFormat": "hex"
+          }
+        },
+        {
+          "name": "fontColor",
+          "type": "text",
+          "widget": "colorSelector",
+          "label": "Font Color",
+          "importance": "low",
+          "default": "#fff",
+          "optional": true,
+          "spectrum": {
+            "showInput": true,
+            "preferredFormat": "hex"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "figureDefinition",
+    "type": "text",
+    "label": "Text read by screen readers defining the figure as a chart.",
+    "importance": "low",
+    "default": "Chart",
+    "common": true
+  },
+  {
     "name": "chartText",
     "type": "text",
     "label": "Chart Title",
@@ -173,78 +252,6 @@
   },
 
 
-  {
-    "name": "listOfTypes",
-    "type": "list",
-    "label": "Data elements",
-    "importance": "high",
-    "entity": "option",
-    "min": 1,
-    "defaultNum": 2,
-    "widget": "showWhen",
-    "showWhen": {
-      "rules" : [
-        {
-          "field": "graphMode",
-          "equals" : [
-            "extendedBarChart",
-            "barChart",
-            "pieChart"
-          ]
-        }
-      ]
-    },
-    "field": {
-      "name": "type",
-      "type": "group",
-      "label": "Data element",
-      "importance": "high",
-      "fields": [
-        {
-          "name": "text",
-          "type": "text",
-          "label": "Name",
-          "importance": "medium"
-        },
-        {
-          "name": "value",
-          "type": "number",
-          "label": "Value",
-          "importance": "low",
-          "default": 1,
-          "min": 0.0001,
-          "decimals": 4
-        },
-        {
-          "name": "color",
-          "type": "text",
-          "widget": "colorSelector",
-          "label": "Color",
-          "importance": "low",
-          "default": "#000",
-          "optional": true,
-          "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
-          }
-        },
-        {
-          "name": "fontColor",
-          "type": "text",
-          "widget": "colorSelector",
-          "label": "Font Color",
-          "importance": "low",
-          "default": "#fff",
-          "optional": true,
-          "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
-          }
-        }
-      ]
-    }
-  },
-
 
   {
     "name": "listOfTypes",
@@ -288,13 +295,5 @@
         }
       ]
     }
-  },
-  {
-    "name": "figureDefinition",
-    "type": "text",
-    "label": "Text read by screen readers defining the figure as a chart.",
-    "importance": "low",
-    "default": "Chart",
-    "common": true
   }
 ]

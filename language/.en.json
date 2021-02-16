@@ -19,6 +19,43 @@
         ]
       },
       {
+        "label": "Data elements",
+        "entity": "option",
+        "widget": "showWhen",
+        "showWhen": {
+          "rules" : [
+            {
+              "field": "graphMode",
+              "equals" : [
+                "extendedBarChart",
+                "barChart",
+                "pieChart"
+              ]
+            }
+          ]
+        },
+        "field": {
+          "label": "Data element",
+          "fields": [
+            {
+              "label": "Name"
+            },
+            {
+              "label": "Value"
+            },
+            {
+              "label": "Color"
+            },
+            {
+              "label": "Font Color"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Text read by screen readers defining the figure as a chart."
+      },
+      {
         "label": "Chart Title",
         "description" : "Adds a title on top of chart.",
         "showWhen": {
@@ -113,44 +150,6 @@
           }
         ]
       },
-
-
-      {
-        "label": "Data elements",
-        "entity": "option",
-        "widget": "showWhen",
-        "showWhen": {
-          "rules" : [
-            {
-              "field": "graphMode",
-              "equals" : [
-                "extendedBarChart",
-                "barChart",
-                "pieChart"
-              ]
-            }
-          ]
-        },
-        "field": {
-          "label": "Data element",
-          "fields": [
-            {
-              "label": "Name"
-            },
-            {
-              "label": "Value"
-            },
-            {
-              "label": "Color"
-            },
-            {
-              "label": "Font Color"
-            }
-          ]
-        }
-      },
-
-
       {
         "label": "Data elements",
         "widget": "showWhen",
@@ -175,9 +174,6 @@
             }
           ]
         }
-      },
-      {
-        "label": "Text read by screen readers defining the figure as a chart."
       }
     ]
   ]

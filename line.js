@@ -129,10 +129,10 @@ H5P.Chart.LineChart = (function () {
       var xAxisRectOffset = lineHeight * 3;
       var chartTitleTextHeight = svg.select('.chart-title')[0][0].getBoundingClientRect().height;
       var chartTitleTextOffset =  chartTitleTextHeight + lineHeight; // Takes the height of the text element and adds line height, so we always have som space under the title
-      var height = h - xTickSize - (lineHeight) - (chartTextDefined ? chartTitleTextOffset : 0); // Add space for labels below, and also the chart title
+      var height = h - xTickSize - (lineHeight) - (chartTextDefined ? chartTitleTextOffset : 40); // Add space for labels below, and also the chart title
       //if xAxisTitle exists, them make room for it by adding more lineheight
       if(isXAxisTextDefined) {
-        height = h - xTickSize - (lineHeight * 2) - (chartTextDefined ? chartTitleTextOffset : 0);
+        height = h - xTickSize - (lineHeight * 2) - (chartTextDefined ? chartTitleTextOffset : 40);
       }
       // Update SVG size
       svg.attr('width', width)
@@ -148,19 +148,19 @@ H5P.Chart.LineChart = (function () {
 
       xAxis.tickSize([0]);
       xAxisG.attr('transform', 'translate(0,0)').call(xAxis);
-      //A lot of conditional moving here. If Y axis text is defined, we translate 40 px in the X direction. In the Y direction we translate downward the by current chartTitle height and line height
-      yAxisG
-          .attr('transform', 'translate(' + (isYAxisTextDefined ? 40 : 10) + ',' + (chartTextDefined ? chartTitleTextOffset : 0) + ')');
 
       yAxisG.call(yAxis
           .tickSize(-width, 0, 0)
           .ticks(getSmartTicks(d3.max(dataSet).value).count));
-
       //Gets all text element from the Y Axis
       var yAxisTicksText = yAxisG.selectAll('g.tick text')[0];
       //Gets width of last Y Axis tick text element
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
+
+      //A lot of conditional moving here. If Y axis text is defined, we translate 40 px in the X direction. In the Y direction we translate downward the by current chartTitle height and line height
+      yAxisG
+          .attr('transform', 'translate(' + (isYAxisTextDefined ? 15 + yAxisLastTickWidth: 10 + yAxisLastTickWidth) + ',' + (chartTextDefined ? chartTitleTextOffset : 40) + ')');
       //Sets the axes titles on resize
       chartText
           .attr('x', width/2 )
@@ -178,7 +178,7 @@ H5P.Chart.LineChart = (function () {
       //Used for positioning/translating the X axis ticks to be in the middle of each bar
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
-        var y = chartTextDefined ? chartTitleTextOffset: 0;
+        var y = chartTextDefined ? chartTitleTextOffset: 20;
         if(isYAxisTextDefined) {
           x = xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
           y += height;
@@ -195,7 +195,7 @@ H5P.Chart.LineChart = (function () {
       var firstXaxisTick = xAxisG.select('.tick');
       var firstXaxisTickXPos = d3.transform(firstXaxisTick.attr("transform")).translate[0];
       var firstXaxisTickWidth = firstXaxisTick[0][0].getBoundingClientRect().width;
-      g.attr('transform', 'translate(' + (firstXaxisTickXPos - firstXaxisTickWidth )+ ',' + (chartTextDefined ? chartTitleTextOffset : 0) + ')');
+      g.attr('transform', 'translate(' + (firstXaxisTickXPos - firstXaxisTickWidth )+ ',' + (chartTextDefined ? chartTitleTextOffset : 40) + ')');
 
       //Apply line positions after the scales have changed on resize
       line.x(function(d,i) {return xScale(i);})
@@ -204,8 +204,7 @@ H5P.Chart.LineChart = (function () {
       //apply lines after resize
       path.attr("class", "line-path")
           .attr("d", line)
-          .style("stroke", params.lineColorGroup);
-
+          .style("stroke", params.lineColorGroup ? params.lineColorGroup : "#000000");
       //Move dots according to scale
       dots.attr("cx", function(d,i) { return xScale(i);})
           .attr("cy", function(d) { return yScale(d.value); });

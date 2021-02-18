@@ -223,6 +223,7 @@
     "label": "Line color",
     "importance": "high",
     "widget": "showWhen",
+    "default": "#000000",
     "showWhen": {
       "rules" : [
         {
@@ -240,8 +241,6 @@
         "widget": "colorSelector",
         "label": "Color of the line in the chart",
         "importance": "low",
-        "default": "#000",
-
         "optional": true,
         "spectrum": {
           "showInput": true,

@@ -204,7 +204,7 @@ H5P.Chart.LineChart = (function () {
       //apply lines after resize
       path.attr("class", "line-path")
           .attr("d", line)
-          .style("stroke", params.lineColorGroup ? params.lineColorGroup : "#000000");
+          .style("stroke", params.lineColorGroup);
       //Move dots according to scale
       dots.attr("cx", function(d,i) { return xScale(i);})
           .attr("cy", function(d) { return yScale(d.value); });

@@ -159,8 +159,11 @@ H5P.Chart.LineChart = (function () {
 
 
       //A lot of conditional moving here. If Y axis text is defined, we translate 40 px in the X direction. In the Y direction we translate downward the by current chartTitle height and line height
+      const xTranslation = (isYAxisTextDefined ? 15 + yAxisLastTickWidth : 10 + yAxisLastTickWidth);
+      const yTranslation = (chartTextDefined ? chartTitleTextOffset : 40);
+
       yAxisG
-          .attr('transform', 'translate(' + (isYAxisTextDefined ? 15 + yAxisLastTickWidth: 10 + yAxisLastTickWidth) + ',' + (chartTextDefined ? chartTitleTextOffset : 40) + ')');
+          .attr('transform', `translate(${xTranslation}, ${yTranslation})`);
       //Sets the axes titles on resize
       chartText
           .attr('x', width/2 )

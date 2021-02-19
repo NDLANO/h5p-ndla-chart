@@ -127,10 +127,10 @@ H5P.Chart.ExtendedBarChart = (function () {
       var xAxisRectOffset = lineHeight * 3;
       var chartTitleTextHeight = svg.select('.chart-title')[0][0].getBoundingClientRect().height;
       var chartTitleTextOffset =  chartTitleTextHeight + lineHeight; // Takes the height of the text element and adds line height, so we always have som space under the title
-      var height = h - xTickSize - (lineHeight) - (chartTextDefined ? chartTitleTextOffset : 0); // Add space for labels below, and also the chart title
+      var height = h - xTickSize - (lineHeight) - (chartTextDefined ? chartTitleTextOffset : 20); // Add space for labels below, and also the chart title
       //if xAxisTitle exists, them make room for it by adding more lineheight
       if(isXAxisTextDefined) {
-        height = h - xTickSize - (lineHeight * 2) - (chartTextDefined ? chartTitleTextOffset : 0);
+        height = h - xTickSize - (lineHeight * 2) - (chartTextDefined ? chartTitleTextOffset : 20);
       }
 
       // Update SVG size
@@ -147,7 +147,7 @@ H5P.Chart.ExtendedBarChart = (function () {
       xAxisG.attr('transform', 'translate(0,0)').call(xAxis);
       //A lot of conditional moving here. If Y axis text is defined, we translate 40 px in the X direction. In the Y direction we translate downward the by current chartTitle height and line height
       yAxisG
-          .attr('transform', 'translate(' + (isYAxisTextDefined ? 40 : 10) + ',' + (chartTextDefined ? chartTitleTextOffset : 0) + ')');
+          .attr('transform', 'translate(' + (isYAxisTextDefined ? 40 : 10) + ',' + (chartTextDefined ? chartTitleTextOffset : 20) + ')');
 
       yAxisG.call(yAxis
           .tickSize(-width, 0, 0)
@@ -168,7 +168,7 @@ H5P.Chart.ExtendedBarChart = (function () {
         }
       }).attr('y', function(d) {
         //If chart text is defined, add the height of the svg chart text and the lineheight to offsett the rects on the y
-        return chartTextDefined ? yScale(d.value) + chartTitleTextOffset : yScale(d.value);
+        return chartTextDefined ? yScale(d.value) + chartTitleTextOffset : 20 + yScale(d.value);
       }).attr('width', xScale.rangeBand())
           .attr('height', function(d) {
             return height - yScale(d.value) ;
@@ -191,7 +191,7 @@ H5P.Chart.ExtendedBarChart = (function () {
       //Used for positioning/translating the X axis ticks to be in the middle of each bar
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
-        var y = chartTextDefined ? chartTitleTextOffset: 0;
+        var y = chartTextDefined ? chartTitleTextOffset: 20;
         if(isYAxisTextDefined) {
           x = xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
           y += height;
@@ -215,7 +215,7 @@ H5P.Chart.ExtendedBarChart = (function () {
         }
       }).attr('y', function(d) {
         //Add more room with a ternary if chart text is defined
-        return height - lineHeight + (chartTextDefined ? chartTitleTextOffset : 0);
+        return height - lineHeight + (chartTextDefined ? chartTitleTextOffset : 20);
       });
 
       // Hide ticks from screen readers, the entire rectangle is already labelled

@@ -181,7 +181,7 @@ H5P.Chart.LineChart = (function () {
       //Used for positioning/translating the X axis ticks to be in the middle of each bar
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
-        var y = chartTextDefined ? chartTitleTextOffset: 20;
+        var y = chartTextDefined ? chartTitleTextOffset: 40;
         if(isYAxisTextDefined) {
           x = xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
           y += height;

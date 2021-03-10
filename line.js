@@ -1,8 +1,10 @@
 /*global d3*/
+
+
 H5P.Chart.LineChart = (function () {
 
   /**
-   * Creates a bar chart from the given data set.
+   * Creates a line chart from the given data set.
    *
    * Notice: LineChart uses its own listOfTypes in h5p-chart/semantics.json, its differentiated through the use of "showWhen"-widget
    * @class
@@ -12,8 +14,6 @@ H5P.Chart.LineChart = (function () {
   function LineChart(params, $wrapper) {
     var self = this;
     var dataSet = params.listOfTypes;
-    var defColors = d3.scale.ordinal()
-        .range(['#fbb033', '#2f2f2f', '#FFB6C1', '#B0C4DE', '#D3D3D3', '#20B2AA', '#FAFAD2']);
     //Lets check if the axes titles are defined, used for setting correct offset for title space in the generated svg
     var chartTextDefined = !!params.chartText;
     var isXAxisTextDefined = !!params.xAxisText;
@@ -40,25 +40,34 @@ H5P.Chart.LineChart = (function () {
         .scale(yScale)
         .orient('left');
     // Create SVG element
-    var svg = d3.select($wrapper[0])
-        .append('svg');
+    var isShowingTooltip = false;
 
-    svg.append('desc').html('chart');
+    var svg = d3.select($wrapper[0])
+        .append('svg')
+    svg.append('desc').html('chart')
 
     // Create x axis
     var xAxisG = svg.append('g')
         .attr('class', 'x-axis');
 
     var yAxisG = svg.append('g')
-        .attr('class', 'y-axis');
+        .attr('class', 'y-axis')
+        .attr('aria-label', H5P.t())
 
+    svg.on("mouseleave", function() {
+      if(isShowingTooltip) {
+        onCircleExit();
+      }
+    });
+    var ariaChartText = chartTextDefined ? params.chartText : "";
+    var ariaXaxisText = isXAxisTextDefined ? params.xAxisText : "";
+    var ariaYaxisText = isYAxisTextDefined ? params.yAxisText : "";
     /**
      * @private
      */
     var key = function (d) {
       return dataSet.indexOf(d);
     };
-
     var chartText = svg.append('text')
         .style('text-anchor', 'middle')
         .attr('class', 'chart-title')
@@ -66,49 +75,104 @@ H5P.Chart.LineChart = (function () {
 
     var xAxisTitle = svg.append('text')
         .style('text-anchor', 'middle')
+        .attr('aria-label', 'X axis title: ' + params.xAxisText)
+        .attr('class', 'axis-title')
         .text(params.xAxisText);
 
     var yAxisTitle = svg.append('text')
         .style('transform', 'rotate(90deg)')
+        .attr('aria-label', 'Y axis title: ' + params.yAxisText)
+        .attr('class', 'axis-title')
         .text(params.yAxisText);
 
-    // Create inner rect labels
-    var xAxisGTexts = svg.selectAll('x-axis text')
-        .data(dataSet, key)
-        .enter();
-
-    var g = svg.append("g"); //Used for creating a container for the
-    var path =  g.selectAll("path")
+    var lineGroup = svg.append("g"); //Used for creating a container for the lines
+    var path =  lineGroup.selectAll("path")
         .data([dataSet])
         .enter()
         .append("path");
-    var dots = g.selectAll("circle")
+    var circeRadius = 7;
+    var dots = lineGroup.selectAll("circle")
         .data(dataSet, key)
         .enter()
         .append("circle")
-        .attr("r", 5)
+        .attr("r", circeRadius)
+        .attr("tabindex", 0)
+        .attr('focusable', 'true')
+        .attr("aria-label", (data) => "Y axis: " +  ariaYaxisText + ": " + data.value +
+            ", X axis: " + ariaXaxisText + ": " + data.text)
         .style("fill", params.lineColorGroup)
-        .on("mouseover", function(d, i) { // Expands the dot the mouse is hovering and appends a text with
-          d3.select(this).transition().duration(200)
-              .attr("r", 7);
+        .on("keyup", function(d,i) {
+          if(d3.event.keyCode === 9 && isShowingTooltip ){
+            onCircleExit(this);
+          }
 
-          g.append("text")
-              .attr("x", function() { return xScale(i) - 2;})
-              .attr("y", function() { return yScale(d.value) - 20;})
-
-              .text(function() { return d.value;})
-              .attr("class", "text-node");
+          if(d3.event.keyCode === 9 && !isShowingTooltip){
+            onCircleEnter(d,i, this);
+          }
         })
-        .on("mouseout", function(d) {
-              // Putting style back to default values
-              d3.select(this).transition().duration(200)
-                  .attr("r", 5)
-                  .style("font-size", 12);
 
-              // Deleting extra elements
-              d3.select(".text-node").remove();
-            }
-        );
+        .on("mouseover", function(d, i) {
+          d3.select(this).transition().duration(200)
+              .attr("r", circeRadius * 1.25);
+          if(isShowingTooltip) {
+            onCircleExit(this);
+            onCircleEnter(d,i, this);
+          }  else
+          {
+            onCircleEnter(d,i, this);
+          }
+
+        })
+
+        .on("mouseout", function(d) { // Animates exit animation for hover exit
+          d3.select(this).transition().duration(200)
+              .attr("r", circeRadius)
+              .style("font-size", 12);
+        });
+
+    function onCircleEnter(d,i, thisCircle) {
+
+      var rectWidth = 20;
+      var rectHeight = 20;
+      var group = lineGroup.append("g")
+          .attr("class", "text-group")
+
+
+      var rect = group.append("rect")
+          .attr("width", function() { return rectWidth;})
+          .attr("height", function() { return rectHeight;})
+          .attr("x", function() { return 0;})
+          .attr("y", function() { return 0;})
+
+          .attr("rx", function() { return 2;})
+          .attr("id", "value-" + i)
+          .attr("class", "text-rect");
+
+      var text = group.append("text")
+          .attr("class", "text-node")
+          .text(function() { return d.value;});
+      var textWidth = text[0][0].getBoundingClientRect().width;
+      var textHeight = text[0][0].getBoundingClientRect().height;
+      rectWidth = rectWidth + textWidth;
+
+      rect.attr("width", function() { return rectWidth;})
+          .transition().duration(200)
+      group.attr('transform', 'translate (' + (xScale(i) - (rectWidth / 2)) + ',' + (yScale(d.value) - (rectHeight * 1.5)) + ')');
+
+      text
+          .attr("x", function() { return (rectWidth - textWidth) / 2  ;})
+          .attr("y", function() { return textHeight ;})
+          .attr("id", "value-" + i)
+          .text(function() { return d.value;});
+      isShowingTooltip = true;
+
+    }
+
+    function onCircleExit() {
+      // Deleting extra elements
+      d3.selectAll(".text-group").remove();
+      isShowingTooltip = false;
+    }
 
 
 
@@ -127,12 +191,13 @@ H5P.Chart.LineChart = (function () {
       var lineHeight = (1.25 * fontSize);
       var xTickSize = (fontSize * 0.125);
       var xAxisRectOffset = lineHeight * 3;
-      var chartTitleTextHeight = svg.select('.chart-title')[0][0].getBoundingClientRect().height;
-      var chartTitleTextOffset =  chartTitleTextHeight + lineHeight; // Takes the height of the text element and adds line height, so we always have som space under the title
-      var height = h - xTickSize - (lineHeight) - (chartTextDefined ? chartTitleTextOffset : 40); // Add space for labels below, and also the chart title
+      //If chart title doesnt exist, we still make an offset
+      var chartTitleTextHeight = chartTextDefined ? svg.select('.chart-title')[0][0].getBoundingClientRect().height : 40;
+      var chartTitleTextOffset =  chartTitleTextHeight  + lineHeight; // Takes the height of the text element and adds line height, so we always have som space under the title
+      var height = h - xTickSize - (lineHeight * 2) - chartTitleTextOffset; // Add space for labels below, and also the chart title
       //if xAxisTitle exists, them make room for it by adding more lineheight
       if(isXAxisTextDefined) {
-        height = h - xTickSize - (lineHeight * 2) - (chartTextDefined ? chartTitleTextOffset : 40);
+        height = h - xTickSize - (lineHeight * 4) - chartTitleTextOffset;
       }
       // Update SVG size
       svg.attr('width', width)
@@ -147,8 +212,9 @@ H5P.Chart.LineChart = (function () {
       y.range([height, 0]);
 
       xAxis.tickSize([0]);
-      xAxisG.attr('transform', 'translate(0,0)').call(xAxis);
-
+      xAxisG.call(xAxis);
+      var firstXaxisTick = xAxisG.select('.tick');
+      var firstXaxisTickWidth = firstXaxisTick[0][0].getBoundingClientRect().width;
       yAxisG.call(yAxis
           .tickSize(-width, 0, 0)
           .ticks(getSmartTicks(d3.max(dataSet).value).count));
@@ -157,13 +223,15 @@ H5P.Chart.LineChart = (function () {
       //Gets width of last Y Axis tick text element
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
-
-      //A lot of conditional moving here. If Y axis text is defined, we translate 40 px in the X direction. In the Y direction we translate downward the by current chartTitle height and line height
-      const xTranslation = (isYAxisTextDefined ? 15 + yAxisLastTickWidth : 10 + yAxisLastTickWidth);
-      const yTranslation = (chartTextDefined ? chartTitleTextOffset : 40);
-
+      //A lot of conditional moving here.
+      const xAxisXTranslation = (isYAxisTextDefined ? firstXaxisTickWidth / 2 : 0 );
+      var minYAxisGMargin = 20;
+      const yAxisXTranslation = (isYAxisTextDefined ? yAxisLastTickWidth  + minYAxisGMargin : yAxisLastTickWidth * 2 );
+      const yTranslation = chartTitleTextOffset;
+      // We have to offset the same xTranslation in negative diretion here
+      xAxisG.attr('transform', `translate(${(xAxisXTranslation) * -1}, ${lineHeight/2})`);
       yAxisG
-          .attr('transform', `translate(${xTranslation}, ${yTranslation})`);
+          .attr('transform', `translate(${yAxisXTranslation}, ${yTranslation})`);
       //Sets the axes titles on resize
       chartText
           .attr('x', width/2 )
@@ -171,17 +239,16 @@ H5P.Chart.LineChart = (function () {
 
       xAxisTitle
           .attr('x', width/2 )
-          .attr('y', h);
+          .attr('y', h-2);
       yAxisTitle
           .attr('x', height/2)
           .attr('y', 0);
-
       var xAxisGTexts = svg.selectAll('g.x-axis g.tick');
 
       //Used for positioning/translating the X axis ticks to be in the middle of each bar
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
-        var y = chartTextDefined ? chartTitleTextOffset: 40;
+        var y = chartTitleTextOffset;
         if(isYAxisTextDefined) {
           x = xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
           y += height;
@@ -193,12 +260,13 @@ H5P.Chart.LineChart = (function () {
           return  'translate (' + x + ', ' + y +')';
         }
       });
-
-
-      var firstXaxisTick = xAxisG.select('.tick');
+      //Needs to be here, because it's now been placed at its final position
       var firstXaxisTickXPos = d3.transform(firstXaxisTick.attr("transform")).translate[0];
-      var firstXaxisTickWidth = firstXaxisTick[0][0].getBoundingClientRect().width;
-      g.attr('transform', 'translate(' + (firstXaxisTickXPos - firstXaxisTickWidth )+ ',' + (chartTextDefined ? chartTitleTextOffset : 40) + ')');
+
+      /*To set the position of the lines we first take x pos of first tick, subtract the x translation of the x axis
+      and then, since origo of the circle element is top left of irs bounding box, we subtract the half of the circle radius*/
+      var lineXPos = firstXaxisTickXPos - xAxisXTranslation - (circeRadius/2)
+      lineGroup.attr('transform', 'translate(' + lineXPos + ',' + chartTitleTextOffset + ')');
 
       //Apply line positions after the scales have changed on resize
       line.x(function(d,i) {return xScale(i);})
@@ -215,6 +283,10 @@ H5P.Chart.LineChart = (function () {
 
       // Hide ticks from screen readers, the entire rectangle is already labelled
       xAxisG.selectAll('text').attr('aria-hidden', true);
+
+      svg.attr("aria-label", "Line chart, title: " + ariaChartText +
+          ", X axis title: " + ariaXaxisText + ", Y axis text: " + ariaYaxisText);
+
     };
   }
 

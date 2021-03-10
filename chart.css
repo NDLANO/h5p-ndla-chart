@@ -34,37 +34,39 @@
 
 .h5p-chart .text-rect {
   fill: black;
+  opacity: 0.7;
 }
-.h5p-chart .text-rect .text-node {
+.h5p-chart .text-node {
   fill: white;
+  font-size: 1.2em;
+}
+
+.h5p-chart circle:focus {
+  outline: black 2px solid;
 }
 
 .h5p-chart .line-path {
   fill: none;
-  stroke-width: 1.5px;
+  stroke-width: 2px;
 }
 
 .h5p-chart .chart-title {
   font-size: 1.5em;
+  font-weight: bold;
 }
 
 .h5p-chart .y-axis .tick line {
   stroke: black;
   opacity: 0.4;
 }
+
+.h5p-chart .axis-title {
+  font-size: 1.3em;;
+  font-weight: bold;
+}
+.h5p-chart text {
+  font-size: 1.1em;;
+}
 .h5p-chart .y-axis path {
   stroke-width: 0;
-}
-
-div.tooltip {
-  position: absolute;
-  text-align: center;
-  width: 60px;
-  height: 28px;
-  padding: 2px;
-  font: 12px sans-serif;
-  background: lightsteelblue;
-  border: 0px;
-  border-radius: 8px;
-  pointer-events: none;
 }

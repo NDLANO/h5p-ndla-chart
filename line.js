@@ -224,14 +224,13 @@ H5P.Chart.LineChart = (function () {
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
       //A lot of conditional moving here.
-      const xAxisXTranslation = (isYAxisTextDefined ? firstXaxisTickWidth / 2 : 0 );
       var minYAxisGMargin = 20;
-      const yAxisXTranslation = (isYAxisTextDefined ? yAxisLastTickWidth  + minYAxisGMargin : yAxisLastTickWidth * 2 );
+      const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth  + minYAxisGMargin : yAxisLastTickWidth * 2 );
       const yTranslation = chartTitleTextOffset;
       // We have to offset the same xTranslation in negative diretion here
-      xAxisG.attr('transform', `translate(${(xAxisXTranslation) * -1}, ${lineHeight/2})`);
+      xAxisG.attr('transform', `translate(${xTranslation + minYAxisGMargin}, ${lineHeight/2})`);
       yAxisG
-          .attr('transform', `translate(${yAxisXTranslation}, ${yTranslation})`);
+          .attr('transform', `translate(${xTranslation}, ${yTranslation})`);
       //Sets the axes titles on resize
       chartText
           .attr('x', width/2 )
@@ -245,27 +244,21 @@ H5P.Chart.LineChart = (function () {
           .attr('y', 0);
       var xAxisGTexts = svg.selectAll('g.x-axis g.tick');
 
-      //Used for positioning/translating the X axis ticks to be in the middle of each bar
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
         var y = chartTitleTextOffset;
-        if(isYAxisTextDefined) {
-          x = xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
+          x =  xScale(i);
           y += height;
           return  'translate (' + x + ', ' + y +')';
-        }
-        else {
-          x =  xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
-          y += height;
-          return  'translate (' + x + ', ' + y +')';
-        }
+
       });
+
       //Needs to be here, because it's now been placed at its final position
       var firstXaxisTickXPos = d3.transform(firstXaxisTick.attr("transform")).translate[0];
 
       /*To set the position of the lines we first take x pos of first tick, subtract the x translation of the x axis
       and then, since origo of the circle element is top left of irs bounding box, we subtract the half of the circle radius*/
-      var lineXPos = firstXaxisTickXPos - xAxisXTranslation - (circeRadius/2)
+      var lineXPos = firstXaxisTickXPos + firstXaxisTickWidth
       lineGroup.attr('transform', 'translate(' + lineXPos + ',' + chartTitleTextOffset + ')');
 
       //Apply line positions after the scales have changed on resize

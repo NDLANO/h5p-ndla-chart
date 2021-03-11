@@ -173,13 +173,13 @@ H5P.Chart.ExtendedBarChart = (function () {
 
       var minYAxisGMargin = 20;
 
-      const yAxisXTranslation = (isYAxisTextDefined ? yAxisLastTickWidth + minYAxisGMargin : yAxisLastTickWidth);
+      const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth + minYAxisGMargin : yAxisLastTickWidth);
 
       const yTranslation = chartTitleTextOffset;
 
-      xAxisG.attr('transform', `translate(${yAxisXTranslation + minYAxisGMargin + xScale.rangeBand()/2}, ${lineHeight/2})`);
+      xAxisG.attr('transform', `translate(${xTranslation + minYAxisGMargin + xScale.rangeBand()/2}, ${lineHeight/2})`);
       yAxisG
-          .attr('transform', `translate(${yAxisXTranslation + lineHeight}, ${yTranslation})`);
+          .attr('transform', `translate(${xTranslation + lineHeight}, ${yTranslation})`);
       //Sets the axes titles on resize
       chartText
           .attr('x', width/2 )
@@ -205,7 +205,7 @@ H5P.Chart.ExtendedBarChart = (function () {
 
       });
 
-      rectGroup.attr('transform', `translate(${yAxisXTranslation + lineHeight}, ${0})`);
+      rectGroup.attr('transform', `translate(${xTranslation + lineHeight}, ${0})`);
 
       rects.attr('x', function(d, i) {
         //if Y Axis title is defined lets make space for Y Axis title by adding the lineheight times 2, to each bar position, and the width of the last, and presumably longest, tick text width

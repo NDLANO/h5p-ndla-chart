@@ -41,8 +41,8 @@
   font-size: 1.2em;
 }
 
-.h5p-chart circle:focus {
-  outline: black 2px solid;
+.h5p-chart circle:focus, .h5p-chart .bar:focus {
+  outline: dodgerblue 2px solid;
 }
 
 .h5p-chart .line-path {

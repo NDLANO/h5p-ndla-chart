@@ -223,11 +223,10 @@ H5P.Chart.LineChart = (function () {
       //Gets width of last Y Axis tick text element
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
-      //A lot of conditional moving here.
       var minYAxisGMargin = 20;
       const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth  + minYAxisGMargin : yAxisLastTickWidth * 2 );
       const yTranslation = chartTitleTextOffset;
-      // We have to offset the same xTranslation in negative diretion here
+
       xAxisG.attr('transform', `translate(${xTranslation + minYAxisGMargin}, ${lineHeight/2})`);
       yAxisG
           .attr('transform', `translate(${xTranslation}, ${yTranslation})`);
@@ -256,8 +255,7 @@ H5P.Chart.LineChart = (function () {
       //Needs to be here, because it's now been placed at its final position
       var firstXaxisTickXPos = d3.transform(firstXaxisTick.attr("transform")).translate[0];
 
-      /*To set the position of the lines we first take x pos of first tick, subtract the x translation of the x axis
-      and then, since origo of the circle element is top left of irs bounding box, we subtract the half of the circle radius*/
+
       var lineXPos = firstXaxisTickXPos + firstXaxisTickWidth
       lineGroup.attr('transform', 'translate(' + lineXPos + ',' + chartTitleTextOffset + ')');
 

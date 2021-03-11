@@ -49,7 +49,7 @@ H5P.Chart.ExtendedBarChart = (function () {
         .append('svg');
 
     svg.append('desc').html('chart');
-    svg.attr("aria-label", "Line chart, title: " + ariaChartText +
+    svg.attr("aria-label", "Bar chart, title: " + ariaChartText +
         ", X axis title: " + ariaXaxisText + ", Y axis text: " + ariaYaxisText);
     // Create x axis
     var xAxisG = svg.append('g')
@@ -64,8 +64,11 @@ H5P.Chart.ExtendedBarChart = (function () {
     var key = function (d) {
       return dataSet.indexOf(d);
     };
+    var rectGroup = svg.append("g")
+        .attr("class", "rect-group");
+
     // Create rectangles for bars
-    var rects = svg.selectAll('rect')
+    var rects = rectGroup.selectAll('rect')
         .data(dataSet, key)
         .enter()
         .append('rect')
@@ -168,15 +171,15 @@ H5P.Chart.ExtendedBarChart = (function () {
       //Gets width of last Y Axis tick text element
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
-      //A lot of conditional moving here.
-      const xAxisXTranslation = (isYAxisTextDefined ? firstXaxisTickWidth / 2 : 0 );
       var minYAxisGMargin = 20;
-      const yAxisXTranslation = (isYAxisTextDefined ? yAxisLastTickWidth  + minYAxisGMargin : yAxisLastTickWidth * 2 );
+
+      const yAxisXTranslation = (isYAxisTextDefined ? yAxisLastTickWidth + minYAxisGMargin : yAxisLastTickWidth);
+
       const yTranslation = chartTitleTextOffset;
-      // We have to offset the same xTranslation in negative diretion here
-      xAxisG.attr('transform', `translate(${(xAxisXTranslation) * -1}, ${lineHeight/2})`);
+
+      xAxisG.attr('transform', `translate(${yAxisXTranslation + minYAxisGMargin + xScale.rangeBand()/2}, ${lineHeight/2})`);
       yAxisG
-          .attr('transform', `translate(${yAxisXTranslation}, ${yTranslation})`);
+          .attr('transform', `translate(${yAxisXTranslation + lineHeight}, ${yTranslation})`);
       //Sets the axes titles on resize
       chartText
           .attr('x', width/2 )
@@ -191,31 +194,22 @@ H5P.Chart.ExtendedBarChart = (function () {
       var xAxisGTexts = svg.selectAll('g.x-axis g.tick');
       // Move rectangles (bars)
 
-
       //Used for positioning/translating the X axis ticks to be in the middle of each bar
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
         var y = chartTitleTextOffset;
-        if(isYAxisTextDefined) {
-          x = xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
+
+          x = xScale(i)  ;
           y += height;
           return  'translate (' + x + ', ' + y +')';
-        }
-        else {
-          x =  xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
-          y += height;
-          return  'translate (' + x + ', ' + y +')';
-        }
+
       });
-      var firstXaxisTickXPos = d3.transform(firstXaxisTick.attr("transform")).translate[0];
+
+      rectGroup.attr('transform', `translate(${yAxisXTranslation + lineHeight}, ${0})`);
 
       rects.attr('x', function(d, i) {
         //if Y Axis title is defined lets make space for Y Axis title by adding the lineheight times 2, to each bar position, and the width of the last, and presumably longest, tick text width
-        if(isYAxisTextDefined) {
-          return xScale(i) +firstXaxisTickXPos / 2;
-        } else {
-          return xScale(i) + firstXaxisTickXPos;
-        }
+          return xScale(i);
       }).attr('y', function(d) {
         //If chart text is defined, add the height of the svg chart text and the lineheight to offsett the rects on the y
         return  yScale(d.value) + chartTitleTextOffset;
@@ -223,17 +217,19 @@ H5P.Chart.ExtendedBarChart = (function () {
           .attr('height', function(d) {
             return height - yScale(d.value) ;
           });
+
       // Re-locate text value labels
       texts.attr('x', function(d, i) {
         if(isYAxisTextDefined) {
           //Offset a bt more if the Y Axis text is defined
-          return xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;}
+          return xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
+        }
         else {
           return xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
         }
       }).attr('y', function(d) {
         //Add more room with a ternary if chart text is defined
-        return height - lineHeight + (chartTextDefined ? chartTitleTextOffset : 20);
+        return height - lineHeight + chartTitleTextOffset;
       });
 
       // Hide ticks from screen readers, the entire rectangle is already labelled

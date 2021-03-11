@@ -64,6 +64,7 @@ H5P.Chart.ExtendedBarChart = (function () {
     var key = function (d) {
       return dataSet.indexOf(d);
     };
+    //rectGroup is for grouping the bars in
     var rectGroup = svg.append("g")
         .attr("class", "rect-group");
 
@@ -161,20 +162,21 @@ H5P.Chart.ExtendedBarChart = (function () {
 
       xAxis.tickSize([0]);
       xAxisG.call(xAxis);
-      var firstXaxisTick = xAxisG.select('.tick');
-      var firstXaxisTickWidth = firstXaxisTick[0][0].getBoundingClientRect().width;
+
       yAxisG.call(yAxis
           .tickSize(-width, 0, 0)
           .ticks(getSmartTicks(d3.max(dataSet).value).count));
-      //Gets all text element from the Y Axis
+      //Gets first text element from the Y Axis
       var yAxisTicksText = yAxisG.selectAll('g.tick text')[0];
-      //Gets width of last Y Axis tick text element
+      //Gets width of last Y Axis tick text elements
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
       var minYAxisGMargin = 20;
 
+      //x translateion differs from when the y axis title text is defined
       const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth + minYAxisGMargin : yAxisLastTickWidth);
 
+      // Y translation used for y axis tick group
       const yTranslation = chartTitleTextOffset;
 
       xAxisG.attr('transform', `translate(${xTranslation + minYAxisGMargin + xScale.rangeBand()/2}, ${lineHeight/2})`);
@@ -192,27 +194,23 @@ H5P.Chart.ExtendedBarChart = (function () {
           .attr('x', height/2)
           .attr('y', 0);
       var xAxisGTexts = svg.selectAll('g.x-axis g.tick');
-      // Move rectangles (bars)
 
-      //Used for positioning/translating the X axis ticks to be in the middle of each bar
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
         var y = chartTitleTextOffset;
-
-          x = xScale(i)  ;
+          x = xScale(i);
           y += height;
           return  'translate (' + x + ', ' + y +')';
 
       });
+//positioning the rectgroup
+      rectGroup.attr('transform', `translate(${xTranslation + lineHeight}, ${chartTitleTextOffset})`);
 
-      rectGroup.attr('transform', `translate(${xTranslation + lineHeight}, ${0})`);
-
+      //rects are already inside the rectGroup, so we need to position them
       rects.attr('x', function(d, i) {
-        //if Y Axis title is defined lets make space for Y Axis title by adding the lineheight times 2, to each bar position, and the width of the last, and presumably longest, tick text width
           return xScale(i);
       }).attr('y', function(d) {
-        //If chart text is defined, add the height of the svg chart text and the lineheight to offsett the rects on the y
-        return  yScale(d.value) + chartTitleTextOffset;
+        return  yScale(d.value);
       }).attr('width', xScale.rangeBand())
           .attr('height', function(d) {
             return height - yScale(d.value) ;
@@ -221,14 +219,12 @@ H5P.Chart.ExtendedBarChart = (function () {
       // Re-locate text value labels
       texts.attr('x', function(d, i) {
         if(isYAxisTextDefined) {
-          //Offset a bt more if the Y Axis text is defined
           return xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
         }
         else {
           return xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
         }
       }).attr('y', function(d) {
-        //Add more room with a ternary if chart text is defined
         return height - lineHeight + chartTitleTextOffset;
       });
 

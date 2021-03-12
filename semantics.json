@@ -85,7 +85,7 @@
           "widget": "colorSelector",
           "label": "Font Color",
           "importance": "low",
-          "default": "#fff",
+          "default": "#2f2f2f",
           "optional": true,
           "spectrum": {
             "showInput": true,
@@ -207,7 +207,7 @@
         "label": "Override  text color for chart",
         "description": "Defines a new color for all text in bars.",
         "importance": "low",
-        "default": "#fff",
+        "default": "#2f2f2f",
 
         "optional": true,
         "spectrum": {

@@ -109,7 +109,7 @@ H5P.Chart.ExtendedBarChart = (function () {
         .enter();
 
     // Create inner rect labels
-    var texts = svg.selectAll('text')
+    var barTexts = svg.selectAll('text')
         .data(dataSet, key)
         .enter()
         .append('text')
@@ -134,23 +134,25 @@ H5P.Chart.ExtendedBarChart = (function () {
     self.resize = function () {
       // Always scale to available space
       var style = window.getComputedStyle($wrapper[0]);
-      var width = parseFloat(style.width);
-      var h = parseFloat(style.height);
+      var horizontalPadding = Math.max(parseFloat(style.width) / 12, 40);
+      var verticalPadding = Math.max(parseFloat(style.height) / 12, 20);
+      var width = parseFloat(style.width) - horizontalPadding;
+      var h = parseFloat(style.height) - verticalPadding;
       var fontSize = parseFloat(style.fontSize);
       var lineHeight = (1.25 * fontSize);
       var xTickSize = (fontSize * 0.125);
       var xAxisRectOffset = lineHeight * 3;
       //If chart title doesnt exist, we still make an offset
       var chartTitleTextHeight = chartTextDefined ? svg.select('.chart-title')[0][0].getBoundingClientRect().height : 20;
-      var chartTitleTextOffset =  chartTitleTextHeight  + lineHeight; // Takes the height of the text element and adds line height, so we always have som space under the title
+      var chartTitleTextOffset =  chartTitleTextHeight  + lineHeight + verticalPadding; // Takes the height of the text element and adds line height, so we always have som space under the title
       var height = h - xTickSize - (lineHeight * 2) - chartTitleTextOffset; // Add space for labels below, and also the chart title
       //if xAxisTitle exists, them make room for it by adding more lineheight
       if(isXAxisTextDefined) {
         height = h - xTickSize - (lineHeight * 4) - chartTitleTextOffset;
       }
       // Update SVG size
-      svg.attr('width', width)
-          .attr('height', h);
+      svg.attr('width', width + horizontalPadding)
+          .attr('height', h + verticalPadding);
 
 
       // Update scales
@@ -196,11 +198,9 @@ H5P.Chart.ExtendedBarChart = (function () {
       var xAxisGTexts = svg.selectAll('g.x-axis g.tick');
 
       xAxisGTexts.attr('transform', function(d, i) {
-        var x;
-        var y = chartTitleTextOffset;
-          x = xScale(i);
-          y += height;
-          return  'translate (' + x + ', ' + y +')';
+        var x = xScale(i);
+        var y = chartTitleTextOffset + height;
+        return  `translate (${x}, ${y})`;
 
       });
 //positioning the rectgroup
@@ -208,7 +208,7 @@ H5P.Chart.ExtendedBarChart = (function () {
 
       //rects are already inside the rectGroup, so we need to position them
       rects.attr('x', function(d, i) {
-          return xScale(i);
+        return xScale(i);
       }).attr('y', function(d) {
         return  yScale(d.value);
       }).attr('width', xScale.rangeBand())
@@ -216,8 +216,9 @@ H5P.Chart.ExtendedBarChart = (function () {
             return height - yScale(d.value) ;
           });
 
+      var offsetFromBar = 5;
       // Re-locate text value labels
-      texts.attr('x', function(d, i) {
+      barTexts.attr('x', function(d, i) {
         if(isYAxisTextDefined) {
           return xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
         }
@@ -225,7 +226,7 @@ H5P.Chart.ExtendedBarChart = (function () {
           return xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
         }
       }).attr('y', function(d) {
-        return height - lineHeight + chartTitleTextOffset;
+        return yScale(d.value) + chartTitleTextOffset - offsetFromBar;
       });
 
       // Hide ticks from screen readers, the entire rectangle is already labelled

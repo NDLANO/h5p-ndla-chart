@@ -182,7 +182,7 @@ H5P.Chart.LineChart = (function () {
     self.resize = function () {
       // Always scale to available space
       var style = window.getComputedStyle($wrapper[0]);
-  var horizontalPadding = parseFloat(style.width) / 16;
+      var horizontalPadding = parseFloat(style.width) / 16;
       var width = parseFloat(style.width) - horizontalPadding ;
       var h = parseFloat(style.height);
       var fontSize = parseFloat(style.fontSize);

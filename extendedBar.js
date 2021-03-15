@@ -109,14 +109,16 @@ H5P.Chart.ExtendedBarChart = (function () {
         .enter();
 
     // Create inner rect labels
-    var barTexts = svg.selectAll('text')
+    var barTexts = rectGroup
+        .selectAll('text')
         .data(dataSet, key)
         .enter()
         .append('text')
+        .attr('text-anchor', 'middless')
         .text(function(d) {
           return d.value;
         })
-        .attr('text-anchor', 'middle')
+        .attr('text-anchor', 'middless')
         .attr('fill', function (d) {
           if(params.overrideColorGroup && params.overrideColorGroup.overrideChartColorsTick ){
             return params.overrideColorGroup.overrideChartColorText;
@@ -218,16 +220,15 @@ H5P.Chart.ExtendedBarChart = (function () {
 
       var offsetFromBar = 5;
       // Re-locate text value labels
+
       barTexts.attr('x', function(d, i) {
-        if(isYAxisTextDefined) {
-          return xScale(i) + xScale.rangeBand() / 2 + xAxisRectOffset + yAxisLastTickWidth;
-        }
-        else {
-          return xScale(i) + xScale.rangeBand() / 2  + lineHeight + yAxisLastTickWidth;
-        }
+          var barTextWidth = this.getBoundingClientRect().width;
+          return xScale(i) + xScale.rangeBand() / 2 - barTextWidth / 2;
+
       }).attr('y', function(d) {
-        return yScale(d.value) + chartTitleTextOffset - offsetFromBar;
+        return yScale(d.value)  - offsetFromBar;
       });
+
 
       // Hide ticks from screen readers, the entire rectangle is already labelled
       xAxisG.selectAll('text').attr('aria-hidden', true);

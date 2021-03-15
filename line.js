@@ -54,7 +54,7 @@ H5P.Chart.LineChart = (function () {
         .attr('class', 'y-axis')
         .attr('aria-label', H5P.t())
 
-    svg.on("mouseleave", function() {
+    svg.on("mouseleavse", function() {
       if(isShowingTooltip) {
         onCircleExit();
       }
@@ -124,8 +124,7 @@ H5P.Chart.LineChart = (function () {
 
         .on("mouseout", function(d) { // Animates exit animation for hover exit
           d3.select(this).transition().duration(200)
-              .attr("r", circeRadius)
-              .style("font-size", 12);
+              .attr("r", circeRadius);
         });
 
     function onCircleEnter(d,i, thisCircle) {
@@ -151,17 +150,22 @@ H5P.Chart.LineChart = (function () {
           .text(function() { return d.value;});
       var textWidth = text[0][0].getBoundingClientRect().width;
       var textHeight = text[0][0].getBoundingClientRect().height;
+      console.log(textHeight)
       rectWidth = rectWidth + textWidth;
+      rectHeight = rectHeight / 2 + textHeight;
 
       rect.attr("width", function() { return rectWidth;})
+      rect.attr("height", function() { return rectHeight;})
           .transition().duration(200)
-      group.attr('transform', 'translate (' + (xScale(i) - (rectWidth / 2)) + ',' + (yScale(d.value) - (rectHeight * 1.5)) + ')');
+      group.attr('transform', 'translate (' + (xScale(i) - (rectWidth / 2)) + ',' + (yScale(d.value) - (rectHeight * 1.33)) + ')');
 
       text
           .attr("x", function() { return (rectWidth - textWidth) / 2  ;})
-          .attr("y", function() { return textHeight ;})
+          .attr("y", function() { return rectHeight/2;})
           .attr("id", "value-" + i)
           .text(function() { return d.value;});
+
+      console.log((rectWidth - textWidth))
       isShowingTooltip = true;
 
     }
@@ -191,7 +195,7 @@ H5P.Chart.LineChart = (function () {
       var xAxisRectOffset = lineHeight * 3;
       //If chart title doesnt exist, we still make an offset
       var chartTitleTextHeight = chartTextDefined ? svg.select('.chart-title')[0][0].getBoundingClientRect().height : 40;
-      var chartTitleTextOffset =  chartTitleTextHeight  + lineHeight; // Takes the height of the text element and adds line height, so we always have som space under the title
+      var chartTitleTextOffset =  chartTitleTextHeight  + lineHeight * 2; // Takes the height of the text element and adds line height, so we always have som space under the title
       var height = h - xTickSize - (lineHeight * 2) - chartTitleTextOffset; // Add space for labels below, and also the chart title
       //if xAxisTitle exists, them make room for it by adding more lineheight
       if(isXAxisTextDefined) {

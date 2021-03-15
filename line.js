@@ -54,7 +54,7 @@ H5P.Chart.LineChart = (function () {
         .attr('class', 'y-axis')
         .attr('aria-label', H5P.t())
 
-    svg.on("mouseleavse", function() {
+    svg.on("mouseleave", function() {
       if(isShowingTooltip) {
         onCircleExit();
       }

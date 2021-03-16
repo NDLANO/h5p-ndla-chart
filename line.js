@@ -187,8 +187,9 @@ H5P.Chart.LineChart = (function () {
       // Always scale to available space
       var style = window.getComputedStyle($wrapper[0]);
       var horizontalPadding = parseFloat(style.width) / 16;
+      var verticalPadding = Math.max(parseFloat(style.height) / 16, 20);
       var width = parseFloat(style.width) - horizontalPadding ;
-      var h = parseFloat(style.height);
+      var h = parseFloat(style.height) - verticalPadding;
       var fontSize = parseFloat(style.fontSize);
       var lineHeight = (1.25 * fontSize);
       var xTickSize = (fontSize * 0.125);
@@ -203,7 +204,7 @@ H5P.Chart.LineChart = (function () {
       }
       // Update SVG size
       svg.attr('width', width + horizontalPadding)
-          .attr('height', h);
+          .attr('height', h + verticalPadding);
 
 
       // Update scales
@@ -215,8 +216,7 @@ H5P.Chart.LineChart = (function () {
 
       xAxis.tickSize([0]);
       xAxisG.call(xAxis);
-      var firstXaxisTick = xAxisG.select('.tick');
-      var firstXaxisTickWidth = firstXaxisTick[0][0].getBoundingClientRect().width;
+
       yAxisG.call(yAxis
           .tickSize(-width, 0, 0)
           .ticks(getSmartTicks(d3.max(dataSet).value).count));
@@ -224,9 +224,9 @@ H5P.Chart.LineChart = (function () {
       var yAxisTicksText = yAxisG.selectAll('g.tick text')[0];
       //Gets width of last Y Axis tick text element
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
-
       var minYAxisGMargin = 20;
-      const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth  + minYAxisGMargin : yAxisLastTickWidth + lineHeight );
+      var yAxisTitleWidth = yAxisTitle[0][0].getBoundingClientRect().width;
+      const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth + yAxisTitleWidth + minYAxisGMargin  : yAxisLastTickWidth + lineHeight );
       const yTranslation = chartTitleTextOffset;
 
       xAxisG.attr('transform', `translate(${xTranslation + minYAxisGMargin}, ${lineHeight/2})`);
@@ -248,9 +248,9 @@ H5P.Chart.LineChart = (function () {
       xAxisGTexts.attr('transform', function(d, i) {
         var x;
         var y = chartTitleTextOffset;
-          x =  xScale(i);
-          y += height;
-          return  'translate (' + x + ', ' + y +')';
+        x =  xScale(i);
+        y += height;
+        return  'translate (' + x + ', ' + y +')';
 
       });
 

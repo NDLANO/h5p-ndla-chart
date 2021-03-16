@@ -176,9 +176,9 @@ H5P.Chart.ExtendedBarChart = (function () {
       var yAxisLastTickWidth = yAxisTicksText[yAxisTicksText.length-1].getBoundingClientRect().width;
 
       var minYAxisGMargin = 20;
-
+      var yAxisTitleWidth = yAxisTitle[0][0].getBoundingClientRect().width;
       //x translateion differs from when the y axis title text is defined
-      const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth + minYAxisGMargin : yAxisLastTickWidth);
+      const xTranslation = (isYAxisTextDefined ? yAxisLastTickWidth + yAxisTitleWidth + minYAxisGMargin : yAxisLastTickWidth);
 
       // Y translation used for y axis tick group
       const yTranslation = chartTitleTextOffset;

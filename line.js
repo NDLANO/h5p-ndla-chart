@@ -44,7 +44,7 @@ H5P.Chart.LineChart = (function () {
 
     var svg = d3.select($wrapper[0])
         .append('svg')
-    svg.append('desc').html('chart')
+    svg.append('desc').html('chart');
 
     // Create x axis
     var xAxisG = svg.append('g')
@@ -52,7 +52,7 @@ H5P.Chart.LineChart = (function () {
 
     var yAxisG = svg.append('g')
         .attr('class', 'y-axis')
-        .attr('aria-label', H5P.t())
+        .attr('aria-label', H5P.t());
 
     svg.on("mouseleave", function() {
       if(isShowingTooltip) {

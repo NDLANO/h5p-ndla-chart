@@ -94,8 +94,7 @@ H5P.Chart.BarChart = (function () {
       var height = h - tickSize - lineHeight; // Add space for labels below
 
       // Update SVG size
-      svg.attr("width", width)
-        .attr("height", h);
+      svg.attr('viewBox', `0 0 ${width} ${h}`);
 
       // Update scales
       xScale.rangeRoundBands([0, width], 0.05);

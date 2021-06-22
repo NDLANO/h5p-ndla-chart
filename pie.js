@@ -74,8 +74,7 @@ H5P.Chart.PieChart = (function () {
         .innerRadius(0);
 
       // Update positions
-      svg.attr('width', width + 'px')
-        .attr('height', height + 'px');
+      svg.attr('viewBox', `0 0 ${width} ${height}`);
       translater.attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")");
       paths.attr("d", arc);
       texts.attr("transform", function(d) {

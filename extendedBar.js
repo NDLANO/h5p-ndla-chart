@@ -153,9 +153,7 @@ H5P.Chart.ExtendedBarChart = (function () {
         height = h - xTickSize - (lineHeight * 4) - chartTitleTextOffset;
       }
       // Update SVG size
-      svg.attr('width', width + horizontalPadding)
-          .attr('height', h + verticalPadding);
-
+      svg.attr('viewBox', `0 0 ${width + horizontalPadding} ${h + verticalPadding}`);
 
       // Update scales
       xScale.rangeRoundBands([0, width - xAxisRectOffset], 0.05); //In order for the X scale to NOT overlap Y axis ticks, we define and offset, making the X scale start further away from the svg wrapper edge

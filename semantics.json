@@ -75,8 +75,13 @@
           "default": "#000",
           "optional": true,
           "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
+            "showPalette": true,
+            "palette": [
+                  ["#1d5cff", "black", "white", "gray"],
+                  ["red", "blue", "yellow", "green"],
+                  ["pink", "purple", "brown", "orange"],
+                  ["lime", "violet", "magenta", "cyan"]
+              ]
           }
         },
         {
@@ -88,8 +93,13 @@
           "default": "#2f2f2f",
           "optional": true,
           "spectrum": {
-            "showInput": true,
-            "preferredFormat": "hex"
+            "showPalette": true,
+            "palette": [
+                  ["#1d5cff", "black", "white", "gray"],
+                  ["red", "blue", "yellow", "green"],
+                  ["pink", "purple", "brown", "orange"],
+                  ["lime", "violet", "magenta", "cyan"]
+              ]
           }
         }
       ]
@@ -196,8 +206,13 @@
 
         "optional": true,
         "spectrum": {
-          "showInput": true,
-          "preferredFormat": "hex"
+          "showPalette": true,
+          "palette": [
+                ["#1d5cff", "black", "white", "gray"],
+                ["red", "blue", "yellow", "green"],
+                ["pink", "purple", "brown", "orange"],
+                ["lime", "violet", "magenta", "cyan"]
+            ]
         }
       },
       {
@@ -211,8 +226,13 @@
 
         "optional": true,
         "spectrum": {
-          "showInput": true,
-          "preferredFormat": "hex"
+          "showPalette": true,
+          "palette": [
+                ["#1d5cff", "black", "white", "gray"],
+                ["red", "blue", "yellow", "green"],
+                ["pink", "purple", "brown", "orange"],
+                ["lime", "violet", "magenta", "cyan"]
+            ]
         }
       }
     ]
@@ -243,8 +263,13 @@
         "importance": "low",
         "optional": true,
         "spectrum": {
-          "showInput": true,
-          "preferredFormat": "hex"
+          "showPalette": true,
+          "palette": [
+                ["#1d5cff", "black", "white", "gray"],
+                ["red", "blue", "yellow", "green"],
+                ["pink", "purple", "brown", "orange"],
+                ["lime", "violet", "magenta", "cyan"]
+            ]
         }
       }
     ]

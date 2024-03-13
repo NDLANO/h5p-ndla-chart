@@ -44,15 +44,11 @@
     {
       "machineName": "H5PEditor.ColorSelector",
       "majorVersion": 1,
-<<<<<<< HEAD
       "minorVersion": 3
-    }
-=======
-      "minorVersion": 2
     },
     { "machineName": "H5PEditor.ShowWhen",
       "majorVersion": 1,
-      "minorVersion": 0 }
->>>>>>> ea5dfbb (bumped patchnumber and added support for  showWhen widget when chart is used without course-presentation)
+      "minorVersion": 0
+    }
   ]
 }

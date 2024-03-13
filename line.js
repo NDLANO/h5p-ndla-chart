@@ -150,7 +150,6 @@ H5P.Chart.LineChart = (function () {
           .text(function() { return d.value;});
       var textWidth = text[0][0].getBoundingClientRect().width;
       var textHeight = text[0][0].getBoundingClientRect().height;
-      console.log(textHeight)
       rectWidth = rectWidth + textWidth;
       rectHeight = rectHeight / 2 + textHeight;
 
@@ -165,7 +164,6 @@ H5P.Chart.LineChart = (function () {
           .attr("id", "value-" + i)
           .text(function() { return d.value;});
 
-      console.log((rectWidth - textWidth))
       isShowingTooltip = true;
 
     }

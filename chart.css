@@ -61,15 +61,18 @@
 .h5p-chart .axis-title {
   font-size: 1.3em;;
   font-weight: bold;
+  text-anchor: middle;
 }
+
 .h5p-chart text {
   font-size: 1.1em;;
 }
+
 .h5p-chart .text-node {
   fill: white;
   font-size: 1.2em;
-  dominant-baseline: central;
 }
+
 .h5p-chart .y-axis path {
   stroke-width: 0;
 }

@@ -310,11 +310,46 @@
     }
   },
   {
-    "name": "figureDefinition",
-    "type": "text",
-    "label": "Text read by screen readers defining the figure as a chart.",
-    "importance": "low",
-    "default": "Chart",
-    "common": true
+    "name": "a11y",
+    "type": "group",
+    "label": "Accessibility texts",
+    "common": true,
+    "fields": [
+      {
+        "name": "figureDefinition",
+        "type": "text",
+        "label": "Text read by screen readers defining the figure as a chart.",
+        "importance": "low",
+        "default": "Chart"
+      },
+      {
+        "name": "lineChart",
+        "type": "text",
+        "label": "Line chart",
+        "importance": "low",
+        "default": "Line chart"
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "label": "Title",
+        "importance": "low",
+        "default": "Title"
+      },
+      {
+        "name": "xAxis",
+        "type": "text",
+        "label": "X axis",
+        "importance": "low",
+        "default": "X axis"
+      },
+      {
+        "name": "yAxis",
+        "type": "text",
+        "label": "Y axis",
+        "importance": "low",
+        "default": "Y axis"
+      }
+    ]
   }
 ]

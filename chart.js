@@ -53,10 +53,32 @@ H5P.Chart = (function ($, EventDispatcher) {
       ];
     }
 
+    const div = document.createElement('div');
+    div.innerHTML = self.params.a11y.title;
+    text = div.textContent || div.innerText || '';
+
+    /**
+     * Decode HTML entities. Not to be used for text that will be inserted into the DOM as HTML, may contain scripts!
+     * @param {string} text Text to be decoded.
+     * @returns {string} Decoded text.
+     */
+    const htmlDecode = (text = '') => {
+      const div = document.createElement('div');
+      div.innerHTML = text;
+      return div.textContent || div.innerText || '';
+    };
+
     // Set the figure definition for screen readers if it doesn't exist
-    if (!self.params.figureDefinition) {
-      self.params.figureDefinition = "Chart";
-    }
+    self.params.a11y = self.params.a11y || {};
+    self.params.a11y.figureDefinition = self.params.a11y.figureDefinition ?? 'Chart';
+    self.params.a11y.lineChart = self.params.a11y.lineChart ?? 'Line chart';
+    self.params.a11y.title = self.params.a11y.title ?? 'Title';
+    self.params.a11y.xAxis = self.params.a11y.xAxis ?? 'X axis';
+    self.params.a11y.yAxis = self.params.a11y.yAxis ?? 'Y axis';
+
+    Object.keys(self.params.a11y).forEach(key => {
+      self.params.a11y[key] = htmlDecode(self.params.a11y[key]);
+    });
 
     // Keep track of type.
     self.type = getChartType(self.params.graphMode);
@@ -145,7 +167,7 @@ H5P.Chart = (function ($, EventDispatcher) {
 
     const $defgroup = $('<div/>', {
       'class': 'hidden-but-read',
-      'html': self.params.figureDefinition,
+      'html': self.params.a11y.figureDefinition,
     });
 
     // Add aria-labels for the data

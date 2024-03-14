@@ -19,7 +19,7 @@ H5P.Chart.PieChart = (function () {
     var svg = d3.select($wrapper[0])
       .append("svg");
 
-    svg.append("desc").html(params.figureDefinition);
+    svg.append("desc").html(params.a11y.figureDefinition);
 
     var translater = svg.append("g")
       .attr("class", "translater");

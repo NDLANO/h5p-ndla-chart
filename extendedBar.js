@@ -63,9 +63,15 @@ H5P.Chart.ExtendedBarChart = (() => {
 
       this.svg.attr('aria-label', ariaLabelSegments.join(', '));
 
-      // Create axes
-      this.xAxisGroup = this.svg.append('g').attr('class', 'x-axis');
-      this.yAxisGroup = this.svg.append('g').attr('class', 'y-axis');
+      // Create x axis
+      this.xAxisGroup = this.svg.append('g')
+        .attr('class', 'x-axis')
+        .attr('aria-label', `${this.params.a11y.xAxis}${ this.params.xAxisText ? ': ' + this.params.xAxisText : '' }`);
+
+      // Create y axis
+      this.yAxisGroup = this.svg.append('g')
+        .attr('class', 'y-axis')
+        .attr('aria-label', `${this.params.a11y.yAxis}${ this.params.yAxisText ? ': ' + this.params.yAxisText : '' }`);
 
       const key = (d) => this.dataSet.indexOf(d);
 
@@ -103,11 +109,13 @@ H5P.Chart.ExtendedBarChart = (() => {
       this.xAxisTitle = this.svg.append('text')
         .style('text-anchor', 'middle')
         .attr('class', 'axis-title')
+        .attr('aria-label', `${params.a11y.xAxis}: ${ params.xAxisText || '' }`)
         .text(params.xAxisText);
 
       this.yAxisTitle = this.svg.append('text')
         .style('transform', 'rotate(270deg)')
         .attr('class', 'axis-title')
+        .attr('aria-label', `${params.a11y.yAxis}: ${ params.yAxisText || '' }`)
         .text(params.yAxisText);
 
       // Create inner rect labels

@@ -1,0 +1,23 @@
+{
+  "name": "h5p-chart",
+  "version": "1.2.25",
+  "description": "Make simple charts.",
+  "scripts": {
+    "build": "cp node_modules/d3/d3.min.js d3.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h5p/h5p-chart.git"
+  },
+  "keywords": [
+    "h5p",
+    "chart",
+    "image",
+    "graphics"
+  ],
+  "author": "Joubel AS",
+  "license": "MIT",
+  "devDependencies": {
+    "d3": "3.5.17"
+  }
+}

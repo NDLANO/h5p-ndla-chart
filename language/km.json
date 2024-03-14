@@ -1,4 +1,4 @@
-  
+
 {
   "semantics": [
     {
@@ -17,6 +17,18 @@
           "label": "Line Chart"
         }
       ]
+    },
+    {
+      "label": "Chart Title",
+      "description" : "Adds a title on top of chart."
+    },
+    {
+      "label": "X Axis Title",
+      "description" : "A title in the bottom of the chart to describe the X axis."
+    },
+    {
+      "label": "Y Axis Title",
+      "description" : "A title on the left-hand side of the chart to describe the Y axis."
     },
     {
       "label": "Data elements",
@@ -40,22 +52,6 @@
       }
     },
     {
-      "label": "Text read by screen readers defining the figure as a chart.",
-      "default": "ក្រាប"
-    },
-    {
-      "label": "Chart Title",
-      "description" : "Adds a title on top of chart."
-    },
-    {
-      "label": "X Axis Title",
-      "description" : "A title in the bottom of the chart to describe the X axis."
-    },
-    {
-      "label": "Y Axis Title",
-      "description" : "A title on the left-hand side of the chart to describe the Y axis."
-    },
-    {
       "label": "Override color controls",
       "fields": [
         {
@@ -74,6 +70,7 @@
     },
     {
       "label": "Line color",
+      "default": "#000000",
       "fields": [
         {
           "label": "Color of the line in the chart"
@@ -82,6 +79,7 @@
     },
     {
       "label": "Data elements",
+      "entity": "option",
       "field": {
         "label": "Data element",
         "fields": [
@@ -93,6 +91,31 @@
           }
         ]
       }
+    },
+    {
+      "label": "Accessibility texts",
+      "fields": [
+        {
+          "label": "Text read by screen readers defining the figure as a chart.",
+          "default": "ក្រាប"
+        },
+        {
+          "label": "Line chart",
+          "default": "Line chart"
+        },
+        {
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "label": "X axis",
+          "default": "X axis"
+        },
+        {
+          "label": "Y axis",
+          "default": "Y axis"
+        }
+      ]
     }
   ]
 }

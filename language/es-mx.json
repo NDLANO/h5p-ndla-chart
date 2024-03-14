@@ -7,19 +7,27 @@
           "label": "Gráfico de Pastel"
         },
         {
-<<<<<<< HEAD
           "label": "Gráfico de Barras"
-=======
-          "label":"Gráfico de barras"
         },
         {
           "label": "Extended Bar Chart"
         },
         {
           "label": "Line Chart"
->>>>>>> a7ec45d (removed unnecessary lines in lang jsons)
         }
       ]
+    },
+    {
+      "label": "Chart Title",
+      "description" : "Adds a title on top of chart."
+    },
+    {
+      "label": "X Axis Title",
+      "description" : "A title in the bottom of the chart to describe the X axis."
+    },
+    {
+      "label": "Y Axis Title",
+      "description" : "A title on the left-hand side of the chart to describe the Y axis."
     },
     {
       "label": "Elementos de datos",
@@ -43,22 +51,6 @@
       }
     },
     {
-      "label": "Texto leído por Lectores de texto en voz alta definiendo la figura como un gráfico.",
-      "default": "Gráfico"
-    },
-    {
-      "label": "Chart Title",
-      "description" : "Adds a title on top of chart."
-    },
-    {
-      "label": "X Axis Title",
-      "description" : "A title in the bottom of the chart to describe the X axis."
-    },
-    {
-      "label": "Y Axis Title",
-      "description" : "A title on the left-hand side of the chart to describe the Y axis."
-    },
-    {
       "label": "Override color controls",
       "fields": [
         {
@@ -77,6 +69,7 @@
     },
     {
       "label": "Line color",
+      "default": "#000000",
       "fields": [
         {
           "label": "Color of the line in the chart"
@@ -85,6 +78,7 @@
     },
     {
       "label": "Data elements",
+      "entity": "option",
       "field": {
         "label": "Data element",
         "fields": [
@@ -96,6 +90,31 @@
           }
         ]
       }
+    },
+    {
+      "label": "Accessibility texts",
+      "fields": [
+        {
+          "label": "Texto leído por Lectores de texto en voz alta definiendo la figura como un gráfico.",
+          "default": "Gráfico"
+        },
+        {
+          "label": "Line chart",
+          "default": "Line chart"
+        },
+        {
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "label": "X axis",
+          "default": "X axis"
+        },
+        {
+          "label": "Y axis",
+          "default": "Y axis"
+        }
+      ]
     }
   ]
 }

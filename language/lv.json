@@ -8,8 +8,26 @@
         },
         {
           "label": "Joslu diagramma"
+        },
+        {
+          "label": "Extended Bar Chart"
+        },
+        {
+          "label": "Line Chart"
         }
       ]
+    },
+    {
+      "label": "Chart Title",
+      "description": "Adds a title on top of chart."
+    },
+    {
+      "label": "X Axis Title",
+      "description": "A title in the bottom of the chart to describe the X axis."
+    },
+    {
+      "label": "Y Axis Title",
+      "description": "A title on the left-hand side of the chart to describe the Y axis."
     },
     {
       "label": "Datu elementi",
@@ -33,8 +51,70 @@
       }
     },
     {
-      "label": "Asistīvo tehnoloģiju lasītais teksts, kas raksturo figūru kā diagrammu.",
-      "default": "Diagramma"
+      "label": "Override color controls",
+      "fields": [
+        {
+          "label": "Override the chart color ",
+          "description": "If ticked, the colors selected will be used as data element color on all bars and txt."
+        },
+        {
+          "label": "Override color for chart",
+          "description": "Defines a new color for all bars, replaces the individual colors in data elements"
+        },
+        {
+          "label": "Override  text color for chart",
+          "description": "Defines a new color for all text in bars."
+        }
+      ]
+    },
+    {
+      "label": "Line color",
+      "default": "#000000",
+      "fields": [
+        {
+          "label": "Color of the line in the chart"
+        }
+      ]
+    },
+    {
+      "label": "Data elements",
+      "entity": "option",
+      "field": {
+        "label": "Data element",
+        "fields": [
+          {
+            "label": "X Value"
+          },
+          {
+            "label": "Y Value"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Accessibility texts",
+      "fields": [
+        {
+          "label": "Asistīvo tehnoloģiju lasītais teksts, kas raksturo figūru kā diagrammu.",
+          "default": "Diagramma"
+        },
+        {
+          "label": "Line chart",
+          "default": "Line chart"
+        },
+        {
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "label": "X axis",
+          "default": "X axis"
+        },
+        {
+          "label": "Y axis",
+          "default": "Y axis"
+        }
+      ]
     }
   ]
 }

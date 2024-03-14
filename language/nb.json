@@ -18,6 +18,18 @@
       ]
     },
     {
+      "label": "Graftittel",
+      "description" : "Tittelen på grafen, blir lagt til i toppen."
+    },
+    {
+      "label": "X aksetittel",
+      "description" : "En tittel i bunnen av grafen til å beskrive X aksen."
+    },
+    {
+      "label": "Y aksetittel",
+      "description" : "En tittel til venstre av grafen til å beskrive Y aksen."
+    },
+    {
       "label": "Verdier",
       "entity": "option",
       "field": {
@@ -39,22 +51,6 @@
       }
     },
     {
-      "label": "Tekst lest av screen readers (som definerer figuren som et diagram).",
-      "default": "Diagram"
-    },
-    {
-      "label": "Graftittel",
-      "description" : "Tittelen på grafen, blir lagt til i toppen."
-    },
-    {
-      "label": "X aksetittel",
-      "description" : "En tittel i bunnen av grafen til å beskrive X aksen."
-    },
-    {
-      "label": "Y aksetittel",
-      "description" : "En tittel til venstre av grafen til å beskrive Y aksen."
-    },
-    {
       "label": "Overstyr farger",
       "fields": [
         {
@@ -73,6 +69,7 @@
     },
     {
       "label": "Farge på linje",
+      "default": "#000000",
       "fields": [
         {
           "label": "Fargen på linjen i linjediagrammet"
@@ -81,6 +78,7 @@
     },
     {
       "label": "Verdier",
+      "entity": "opsjon",
       "field": {
         "label": "Verdi",
         "fields": [
@@ -92,6 +90,31 @@
           }
         ]
       }
+    },
+    {
+      "label": "Accessibility texts",
+      "fields": [
+        {
+          "label": "Tekst lest av screen readers (som definerer figuren som et diagram).",
+          "default": "Diagram"
+        },
+        {
+          "label": "Line chart",
+          "default": "Line chart"
+        },
+        {
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "label": "X axis",
+          "default": "X axis"
+        },
+        {
+          "label": "Y axis",
+          "default": "Y axis"
+        }
+      ]
     }
   ]
 }
